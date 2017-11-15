@@ -1,0 +1,137 @@
+# common prefixes
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix doco: <http://purl.org/spar/doco/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix gml: <http://www.opengis.net/ont/gml#> .
+@prefix locn: <http://www.w3.org/ns/locn#> .
+@prefix ogc: <http://www.opengis.net/ont/geosparql#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix voaf: <http://purl.org/vocommons/voaf#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+# prefixes specific to BRK
+@prefix brk_str: <http://brk.basisregistraties.overheid.nl/id/structuur/>.
+@prefix brk_beg: <http://brk.basisregistraties.overheid.nl/id/begrip/>.
+@prefix brk: <http://brk.basisregistraties.overheid.nl/def/brk#>.
+@prefix : <http://brk.basisregistraties.overheid.nl/def/>.
+
+brk_str:Perceel a sh:NodeShape;
+    sh:property brk_str:Perceel_kadastraleGemeente;
+    sh:property brk_str:Perceel_sectie;
+    sh:property brk_str:Perceel_perceelnummer;
+    sh:property brk_str:Perceel_begrenzingPerceel;
+    sh:property brk_str:Perceel_kadastraleGrootte;
+    sh:property brk_str:Perceel_soortGrootte;
+    sh:property brk_str:Perceel_perceelnummerRotatie;
+    sh:property brk_str:Perceel_plaatscoordinaten;
+    sh:targetClass brk:Perceel
+.
+brk_str:KadastraleGrens a sh:NodeShape;
+    sh:property brk_str:KadastraleGrens_typeGrens;
+    sh:property brk_str:KadastraleGrens_grenslijn;
+    sh:targetClass brk:KadastraleGrens
+.
+brk_str:Geometry a sh:NodeShape;
+    sh:targetClass ogc:Geometry;
+    sh:name "ogc:Geometry"^^xsd:string
+.
+
+brk_str:KadastraleGemeente a sh:NodeShape;
+    sh:property [
+       sh:path [
+           sh:inversePath skos:member
+       ];
+       sh:hasValue <http://brk.basisregistraties.overheid.nl/id/collectie/KadastraleGemeente>
+   ];
+    sh:name "Kadastrale gemeente"^^xsd:string
+.
+brk_str:SoortGrootte a sh:NodeShape;
+    sh:property [
+       sh:path [
+           sh:inversePath skos:member
+       ];
+       sh:hasValue <http://brk.basisregistraties.overheid.nl/id/collectie/SoortGrootte>
+   ];
+    sh:name "Soort grootte"^^xsd:string
+.
+brk_str:TypeGrens a sh:NodeShape;
+    sh:property [
+       sh:path [
+           sh:inversePath skos:member
+       ];
+       sh:hasValue <http://brk.basisregistraties.overheid.nl/id/collectie/TypeGrens>
+   ];
+    sh:name "Type grens"^^xsd:string
+.
+brk_str:Perceel_kadastraleGemeente a sh:PropertyShape;
+    sh:class skos:Concept;
+    sh:nodeKind sh:IRI;
+    sh:maxCount 1;
+    sh:minCount 1;
+    sh:path brk:kadastraleGemeente;
+    sh:node brk_str:KadastraleGemeente
+.
+brk_str:Perceel_sectie a sh:PropertyShape;
+    sh:nodeKind sh:Literal;
+    sh:maxCount 1;
+    sh:datatype xsd:string;
+    sh:minCount 1;
+    sh:path brk:sectie
+.
+brk_str:Perceel_perceelnummer a sh:PropertyShape;
+    sh:nodeKind sh:Literal;
+    sh:maxCount 1;
+    sh:datatype xsd:integer;
+    sh:minCount 1;
+    sh:path brk:perceelnummer
+.
+brk_str:Perceel_begrenzingPerceel a sh:PropertyShape;
+    sh:class ogc:Geometry;
+    sh:nodeKind sh:IRI;
+    sh:maxCount 1;
+    sh:path brk:begrenzingPerceel
+.
+brk_str:Perceel_kadastraleGrootte a sh:PropertyShape;
+    sh:nodeKind sh:Literal;
+    sh:maxCount 1;
+    sh:datatype xsd:float;
+    sh:path brk:kadastraleGrootte
+.
+brk_str:Perceel_soortGrootte a sh:PropertyShape;
+    sh:class skos:Concept;
+    sh:nodeKind sh:IRI;
+    sh:maxCount 1;
+    sh:path brk:soortGrootte;
+    sh:node brk_str:SoortGrootte
+.
+brk_str:Perceel_perceelnummerRotatie a sh:PropertyShape;
+    sh:class brk:perceelnummerRotatie;
+    sh:maxCount 1;
+    sh:datatype xsd:float;
+    sh:path brk:perceelnummerRotatie
+.
+brk_str:Perceel_plaatscoordinaten a sh:PropertyShape;
+    sh:class ogc:Geometry;
+    sh:nodeKind sh:IRI;
+    sh:maxCount 1;
+    sh:path brk:plaatscoordinaten
+.
+brk_str:KadastraleGrens_typeGrens a sh:PropertyShape;
+    sh:class skos:Concept;
+    sh:nodeKind sh:IRI;
+    sh:maxCount 1;
+    sh:path brk:typeGrens;
+    sh:node brk_str:TypeGrens
+.
+brk_str:KadastraleGrens_grenslijn a sh:PropertyShape;
+    sh:class ogc:Geometry;
+    sh:nodeKind sh:IRI;
+    sh:maxCount 1;
+    sh:path brk:grenslijn
+.
