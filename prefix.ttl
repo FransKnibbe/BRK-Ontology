@@ -1,4 +1,6 @@
 # common prefixes
+@prefix bibo: <http://purl.org/ontology/bibo/> .
+@prefix dbpo: <http://dbpedia.org/ontology> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix doco: <http://purl.org/spar/doco/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .

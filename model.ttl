@@ -1,4 +1,6 @@
 # common prefixes
+@prefix bibo: <http://purl.org/ontology/bibo/> .
+@prefix dbpo: <http://dbpedia.org/ontology> .
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix doco: <http://purl.org/spar/doco/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
@@ -24,31 +26,38 @@
 
 # TO DO
 # > Add ontology metadata
-# > Add datatypeProperties
+# > Add more datatype properties
 # > Add rdfs:comments where missing
 # > Add relationships (dct:subject) to corresponding SKOS concepts
 # > How should OnroerendeZaak and Appartementsrecht be related?
 
 
-### This ontology
+
+##### This ontology
 
 :brk a owl:Ontology;
   rdfs:label "vocabulaire voor de Basisregistratie Kadaster (BRK)"@nl;
   rdfs:comment "Dit vocabulaire is gebaseerd op het Canoniek Domeinmodel voor BRK (CDMKAD), versie september 2016, en het Productmodel Basisregistratie Kadaster Levering, versie 20150101."@nl;
   owl:versionInfo "0.0.1"@nl;
   rdfs:seeAlso <https://brk.basisregistraties.overheid.nl/>;
+  sh:shapesGraph :brk_str;
 .
 
-### Classes
+##### Classes
 
-# Abstract UML class _KadastraalObject does not need to be modelled, because it only introduces an 
-# identification string, which can be published as an rdfs:label.
-
-# ObjectCompleetProduct seems to describe a subset of source data made available by an application. It does
-# not seem to describe the source data themselves, so ObjectCompleetProduct is not modelled here.
-
-# _Voorkomen is intended to record provenance data (history/audit trail), so an attempt is made to map to PROV-O. 
-# All subclasses of _Voorkomen will be instances of prov:Entity. brk:HistorischObject is defined to make that clear.
+## Notes for classes:
+#
+# 1) Abstract UML class _KadastraalObject does not need to be modelled, because it only introduces an 
+# identification string, which can be published as an rdfs:label. Relationships to KadastraalObject can
+# be directed to its only subclass, OnroerendeZaak.
+#
+# 2) ObjectCompleetProduct seems to describe a subset of source data made available by an application.
+# It does not seem to describe the source data themselves, so ObjectCompleetProduct is not modelled here.
+#
+# 3)  _Voorkomen is intended to record provenance data (history/audit trail), so an attempt is made to
+# map to PROV-O. All subclasses of _Voorkomen will be instances of prov:Entity. brk:HistorischVoorkomen is 
+# defined to make that clear.
+#
 
 brk:HistorischVoorkomen a owl:Class; # This name retains the original name _Voorkomen, but better explains itself
   rdfs:subClassOf prov:Entity;
@@ -131,12 +140,13 @@ brk:KadastraleGrootte a owl:class;
   rdfs:isDefinedBy :brk;
 .
 
-brk:SoortGrootte a owl:class;
-  rdfs:label "Soort grootte",
-    rdfs:label "Soort oppervlakte";
-  rdfs:comment "De soort vaststelling van de oppervlakte van een perceel."@nl;
-  rdfs:isDefinedBy :brk;
-.
+# Soort grootte should be defined as SKOS concepts in brk_beg
+# brk:SoortGrootte a owl:class;
+  # rdfs:label "Soort grootte",
+    # rdfs:label "Soort oppervlakte";
+  # rdfs:comment "De soort vaststelling van de oppervlakte van een perceel."@nl;
+  # rdfs:isDefinedBy :brk;
+# .
 
 brk:Perceelnummerverschuiving a owl:Class;
   rdfs:label "Perceelnummerverschuiving"@nl;
@@ -150,7 +160,107 @@ brk:KadastraleGrens a owl:Class;
   dct:subject brk_beg:KadastraleGrens;
 .
 
-### Properties
+brk:Aantekening a owl:Class;
+  rdfs:label "Aantekening"@nl;
+  rdfs:comment "Een aantekening betreft een verwijzing naar een stuk. Een aantekening geeft aan welk feit
+er bestaat, genoemd in een stuk, dat gevolgen kan hebben voor de uitoefening van rechten op een onroerende
+zaak."
+  rdfs:isDefinedBy :brk;
+.
+
+brk:Stuk a owl:Class;
+  rdfs:subClassOf foaf:Document,
+    dbpo:Document,
+    bibo:Document;
+  rdfs:label "Stuk"@nl;
+  rdfs:comment "Een Kadastraal stuk is een brondocument dat aanleiding geeft tot een wijziging van de gegevens in de BRK"@nl;
+  rdfs:isDefinedBy :brk;
+.
+
+brk:Stukdeel a owl:Class;
+  rdfs:subClassOf bibo:DocumentPart,
+    doco:Section;
+  rdfs:label "Stukdeel"@nl;
+  rdfs:comment "Een Stukdeel is een (zelfstandig te onderkennen) deel van een stuk, op grond waarvan gegevens in de kadastrale registratie ontstaan, wijzigen, vervallen of worden aangevuld. Als in een stuk bijvoorbeeld is vermeld dat er verschillende rechten betrokken zijn bij verschillende leveringen (tegen verschillende koopsommen) dan worden die fragmenten uit de tekst van die akte als verschillende stukdelen onderkend. Dergelijke stukdelen kunnen in de toekomst afzonderlijk worden aangevuld, doorgehaald, en dergelijke. Een stukdeel komt vaak overeen met een rechtsfeit."@nl;
+  rdfs:isDefinedBy :brk;
+.
+
+brk:Kadasterstuk a owl:Class;
+  rdfs:subClassOf brk:Stuk;
+  rdfs:label "Kadasterstuk"@nl;
+  rdfs:comment "Een kadasterstuk is een stuk dat gevolgen kan hebben voor kadastrale en topografische
+registratie, maar dat niet ter inschrijving in de Openbare registers is aangeboden"@nl;
+  rdfs:isDefinedBy :brk;
+.
+
+brk:TerInschrijvingAangebodenStuk a owl:Class;
+  rdfs:subClassOf brk:Stuk;
+  rdfs:label "Ter inschrijving aangeboden stuk"@nl;
+  rdfs:comment "Een stuk dat ter inschrijving in de openbare registers is aangeboden."@nl;
+  rdfs:isDefinedBy :brk;
+.
+
+brk:Kadasterverzoek a owl:Class;
+  rdfs:label "Kadasterverzoek"@nl;
+  rdfs:comment "Een kadasterverzoek is een verzoek van het Kadaster aan de aanbieder van een ter inschrijving aangeboden stuk in verband met de afhandeling van het stuk."@nl;
+  rdfs:isDefinedBy :brk;
+.
+
+brk:RedenVerzoek a owl:Class;
+  rdfs:label "Reden verzoek"@nl;
+  rdfs:comment "De reden voor het versturen van een kadasterverzoek naar de aanbieder van van een ter inschrijving aangeboden stuk."@nl;
+  rdfs:isDefinedBy :brk;
+.
+
+brk:Ondertekenaar a owl:Class;
+  rdfs:subClassOf foaf:Person;
+  rdfs:label "Ondertekenaar"@nl;
+  rdfs:comment "Een persoon die een aangeboden stuk heeft ondertekend.";@nl;
+  rdfs:isDefinedBy :brk;
+.
+
+brk:Acgidentificatie a owl:Class;
+  rdfs:label "ACG-identificatie"@nl;
+  rdfs:comment "Identificatie van het Ambtelijk Correctiegegeven (ACG). Als het Kadaster constateert dat bijvoorbeeld een akte verkeerd in de kadastrale registratie is verwerkt, wordt dit met een ACG hersteld"@nl;
+  rdfs:isDefinedBy :brk;
+.
+
+brk:Persoon a owl:Class;
+  rdfs:label "Persoon"@nl;
+  rdfs:comment "Iets dat rechten en plichten kan hebben."@nl;
+  rdfs:isDefinedBy :brk;
+.
+
+brk:NatuurlijkPersoon a owl:Class;
+  rdfs:subClassOf foaf:Person;
+  rdfs:label "Natuurlijk persoon"@nl;
+  rdfs:comment "Een mens, eventueel overleden."@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:subClassOf brk:Persoon;
+.
+
+brk:NietnatuurlijkPersoon a owl:Class;
+  rdfs:label "Niet-natuurlijk persoon"@nl;
+  rdfs:comment "Een niet-natuurlijk persoon is een rechtspersoon of samenwerkingsverband (bedrijf of organisatie)."@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:subClassOf brk:Persoon;
+.
+
+  
+  
+  
+##### 
+## Notes for properties:
+#
+# 1) It does not seem necessary to define the relationship between Stuk and Stukdeel in this ontology
+# because common terms can be used for that (e.g. dct:hasPart and dct:isPartOf). Mandatory relationships
+# can be specified in the SHACL shapes graph.
+# 
+# 2) dct:creator can be used to model the isOpgemaaktDoor relationship between TerInschrijvingAangebodenStuk and Ondertekenaar.
+#
+
+
+## Object properties
 
 brk:kadastraleAanduiding a owl:ObjectProperty;
   rdfs:label "kadastrale aanduiding"@nl;
@@ -247,10 +357,18 @@ brk:kadastraleGrootte a owl:ObjectProperty;
 
 brk:soortGrootte a owl:ObjectProperty;
   rdfs:label "soort grootte"@nl;
-  rdfs:comment "Verwijzing naar de aanduiding van de soort grootte (oppervlakte) van een pervceel."@nl;
+  rdfs:comment "Verwijzing naar de aanduiding van de soort grootte (oppervlakte) van een perceel."@nl;
   rdfs:isDefinedBy :brk;
   rdfs:domain brk:KadastraleGrootte;
-  rdfs:range brk:SoortGrootte;
+  rdfs:range skos:Concept;
+.
+
+brk:heeftBetrekkingOp a owl:ObjectProperty;
+  rdfs:label "heeft betrekking op"@nl;
+  rdfs:comment "Verwijzing naar de onroerende zaak waarop de aantekenign betrekking heeft";
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:Aantekening;
+  rdfs:range brk:OnroerendeZaak;
 .
 
 brk:typeGrens a owl:ObjectProperty;
@@ -265,10 +383,70 @@ brk:grenslijn a owl:ObjectProperty;
   dct:subject brk_beg:Grenslijn
 .
 
+brk:isAanvullingOp a owl:ObjectProperty;
+  rdfs:label "is aanvulling op"@nl;
+  rdfs:comment "Verwijzing naar een stukdeel waarop dit stukdeel een aanvulling is."@nl
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:Stukdeel;
+  rdfs:range brk:Stukdeel;
+.
+
+brk:heeftKadasterverzoek  a owl:ObjectProperty;
+  rdfs:label "heeft kadasterverzoek"@nl;
+  rdfs:comment "Verwijzing naar een kadasterverzoek."@nl
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:TerInschrijvingAangebodenStuk;
+  rdfs:range brk:Kadasterverzoek;
+.
+
+brk:heeftReden a owl:ObjectProperty;
+  rdfs:label "heeft reden"@nl;
+  rdfs:comment "Verwijzing naar de reden voor een kadasterverzoek."@nl
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:Kadasterverzoek;
+  rdfs:range brk:RedenVerzoek;
+.
+
+# What does this mean? No explanation can be found.
+brk:heeftAlsEquivalentieVerklaarder a owl:ObjectProperty;
+  rdfs:label "heeft als equivalentieverklaarder"@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:TerInschrijvingAangebodenStuk;
+  rdfs:range brk:Ondertekenaar;
+.
+
+brk:heeftTekening a owl:ObjectProperty;
+  rdfs:label "heeft tekening"@nl;
+  rdfs:comment "Verwijzing naar een tekening"@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:Appartementsrecht;
+  rdfs:range brk:Stukdeel;
+.
+
+brk:acgidentificatie a owl:ObjectProperty;
+  rdfs:label "ACG-identificatie"@nl;
+  rdfs:comment "Verwijzing naar een ACG-identificatie."@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:Kadasterstuk;
+  rdfs:range brk:Acgidentificatie;
+.
+
+brk:isVermeldIn a owl:ObjectProperty;
+  rdfs:label "is vermeld in"@nl;
+  rdfs:comment "Verwijzing naar een stukdeel waarin deze persoon is vermeld."@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:Persoon;
+  rdfs:range brk:Kadasterstuk;
+.
+
+## Datatype Properties
+
 brk:sectie a owl:DatatypeProperty;
   rdfs:label "sectie"@nl;
+  rdfs:comment "Een sectie is een onderdeel van een kadastrale gemeente en vormt het tweede deel van de aanduiding van een kadastraal object. De sectie was van oorsprong een logische eenheid binnen de gemeente, bijvoorbeeld een dorp of streek. Secties worden aangeduid met een (hoofd)letter, in sommige gevallen twee."@nl;
   rdfs:isDefinedBy :brk;
-  dct:subject brk_beg:Sectie
+  dct:subject brk_beg:Sectie;
+  rdfs:range xsd:string;
 .
 
 brk:perceelnummer a owl:DatatypeProperty;
