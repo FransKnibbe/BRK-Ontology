@@ -6,6 +6,7 @@
 @prefix locn: <http://www.w3.org/ns/locn#> .
 @prefix ogc: <http://www.opengis.net/ont/geosparql#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
@@ -21,16 +22,126 @@
 @prefix brk: <http://brk.basisregistraties.overheid.nl/def/brk#>.
 @prefix : <http://brk.basisregistraties.overheid.nl/def/>.
 
+# TO DO
+# > Add ontology metadata
+# > Add datatypeProperties
+# > Add rdfs:comments where missing
+# > Add relationships (dct:subject) to corresponding SKOS concepts
+# > How should OnroerendeZaak and Appartementsrecht be related?
+
+
+### This ontology
+
 :brk a owl:Ontology;
-  rdfs:label "Vocabulaire voor de Basisregistratie Kadaster (BRK)"@nl;
+  rdfs:label "vocabulaire voor de Basisregistratie Kadaster (BRK)"@nl;
+  rdfs:comment "Dit vocabulaire is gebaseerd op het Canoniek Domeinmodel voor BRK (CDMKAD), versie september 2016, en het Productmodel Basisregistratie Kadaster Levering, versie 20150101."@nl;
   owl:versionInfo "0.0.1"@nl;
   rdfs:seeAlso <https://brk.basisregistraties.overheid.nl/>;
 .
 
+### Classes
+
+# Abstract UML class _KadastraalObject does not need to be modelled, because it only introduces an 
+# identification string, which can be published as an rdfs:label.
+
+# ObjectCompleetProduct seems to describe a subset of source data made available by an application. It does
+# not seem to describe the source data themselves, so ObjectCompleetProduct is not modelled here.
+
+# _Voorkomen is intended to record provenance data (history/audit trail), so an attempt is made to map to PROV-O. 
+# All subclasses of _Voorkomen will be instances of prov:Entity. brk:HistorischObject is defined to make that clear.
+
+brk:HistorischVoorkomen a owl:Class; # This name retains the original name _Voorkomen, but better explains itself
+  rdfs:subClassOf prov:Entity;
+  rdfs:label "Historisch voorkomen"@nl;
+  rdfs:label "Iets dat gegevens over zijn geschiedenis (herkomst) kan hebben."@nl;
+  rdfs:isDefinedBy :brk;
+.
+
+brk:OnroerendeZaak a owl:Class; 
+  rdfs:subClassOf brk:HistorischVoorkomen;
+  rdfs:label "Onroerende zaak"@nl;
+  rdf:comment "Een onroerende zaak is de grond, de niet gewonnen delfstoffen, de met de grond verenigde beplantingen, alsmede de gebouwen en werken die duurzaam met de grond zijn verenigd, hetzij rechtstreeks, hetzij door vereniging met andere gebouwen of werken."@nl;
+  rdfs:isDefinedBy :brk;
+.
+
 brk:Perceel a owl:Class;
-  rdfs:label "Perceel"@nl;
+  rdfs:subClassOf brk:OnroerendeZaak,
+    ogc:Feature;
+  rdfs:label "Perceel"@nl,
+    "Kadastraal perceel"@nl;
+  rdfs:comment "Een kadastraal perceel is een kadastraal geïdentificeerd en met kadastrale grenzen begrensd deel van het Nederlands grondgebied (art. 1 lid 1 Kadasterwet). Percelen worden cartografisch gerepresenteerd door een tweedimensionale vlakbegrenzing. Tussen alle kadastrale percelen in Nederland geldt een topologische relatie (opdelende vlakstructuur), d.w.z. dat naburige perceelsvlakken naadloos moeten aansluiten en elkaar niet mogen overlappen."
   rdfs:isDefinedBy :brk;
   dct:subject brk_beg:Perceel;
+.
+
+brk:Appartementsrecht a owl:Class; 
+  rdfs:subClassOf brk:OnroerendeZaak; # This does not seem right: OnroerendeZaak seems to a be tangible thing, Appartementsrecht is not.
+  rdfs:label "Appartementsrecht"@nl;
+  rdfs:comment "Een appartementsrecht is een onroerende zaak. Een appartementsrecht is een aandeel in de goederen die in de splitsing zijn betrokken, dat de bevoegdheid omvat tot het uitsluitend gebruik van bepaalde gedeelten van het gebouw die blijkens hun inrichting bestemd zijn of worden om als afzonderlijk geheel te worden gebruikt. Het aandeel kan mede omvatten de bevoegdheid tot het uitsluitend gebruik van bepaalde gedeelten van de bij het gebouw behorende grond. In het geval van lid 2 omvat het aandeel de bevoegdheid tot het uitsluitend gebruik van bepaalde gedeelten van het stuk grond, die blijkens hun inrichting of aanduiding bestemd zijn of worden om als afzonderlijk geheel te worden gebruikt. (art. 5:106 lid 4 BW)."@nl;
+  rdfs:isDefinedBy :brk;
+  dct:subject brk_beg:Appartementsrecht;
+.
+
+brk:Leidingnetwerk a owl:Class;
+  rdfs:subClassOf brk:OnroerendeZaak,
+    ogc:Feature;
+  rdfs:label "Leidingnetwerk"@nl;
+  rdfs:isDefinedBy :brk;
+  dct:subject brk_beg:Leidingnetwerk;
+.
+
+brk:KadastraleAanduiding a owl:Class;
+  rdfs:label "Kadastrale aanduiding"@nl;
+  rdfs:comment """Kadastrale aanduiding is de unieke aanduiding van een onroerende zaak, die door het kadaster wordt vastgesteld.
+Percelen worden kadastraal aangeduid door vermelding van achtereenvolgens de kadastrale gemeente en sectie, waarin de percelen en gedeelten van percelen zijn gelegen waarvan het grondgebied tot die zaak behoort, alsmede de nummers van die percelen. Voor een onroerende zaak die zich krachtens een opstalrecht op, in of boven de grond van een ander bevindt, geldt dezelfde kadastrale aanduiding als van de onroerende zaak die met dat opstalrecht is bezwaard. Dit is van overeenkomstige toepassing op een onroerende zaak die zich op, in of boven de grond van een ander bevindt krachtens een recht als bedoeld in het voor 1 januari 1992 geldende artikel 5, derde lid, onder b, laatste zinsnede, van de Belemmeringenwet Privaatrecht.
+Appartementsrechten worden kadastraal aangeduid door de vermelding van achtereenvolgens de kadastrale gemeente en sectie, waarin de in de splitsing betrokken percelen zijn gelegen, de complexaanduiding en de appartementsindex. De complexaanduiding bestaat uit het voor de in de splitsing betrokken percelen vastgestelde complexnummer, gevolgd door de hoofdletter A. Onze Minister stelt regelen vast omtrent de vaststelling van het complexnummer."""@nl
+  rdfs:isDefinedBy :brk;
+  dct:subject brk_beg:KadastraleGrens;
+.
+
+brk:KadastraleGemeente a owl:Class;
+  rdfs:label "Kadastrale gemeente"@nl;
+  rdfs:commment "De kadastrale gemeente."@nl;
+  rdfs:isDefinedBy :brk;
+.
+
+brk:Landinrichtingsrente a owl:Class;
+  rdfs:label "Landinrichtingsrente"@nl;
+  rdfs:commment "De rente die berekend wordt over de percelen die in een herverkavelingblok van een landinrichtingsproject hebben gelegen. Deze rente wordt berekend om de niet gesubsidieerde kosten van het herverkavelingproject te dekken."@nl;
+  rdfs:isDefinedBy :brk;
+.
+
+brk:Koopsom a owl:Class;
+  rdfs:label "Koopsom"@nl;
+  rdfs:comment "Een koopsom is het bedrag dat vermeld staat in het ter inschrijving aangeboden stuk, dat als tegenprestatie geldt met betrekking tot een transactie of overdracht van een zakelijk recht van een object (of samen met meerdere objecten) en dat de verkrijger aan de vervreemder verschuldigd is. Dit bedrag hebben verkrijger en vervreemder onderling met elkaar afgesproken en wordt door een notaris opgenomen in de akte."@nl;
+  rdfs:isDefinedBy :brk;
+.
+
+brk:Onroerendezaakfiliatie a owl:Class;
+  rdfs:subClassOf prov:Activitiy;
+  rdfs:label "Onroerendezaakfiliatie"@nl;
+  rdfs:comment "Een onroerendezaakfiliatie geeft de relatie aan tussen een oude en een nieuwe onroerende zaak. Het betreft hier de relatie tussen twee percelen, twee appartementsrechten of twee leidingnetwerken."@nl;
+  rdfs:isDefinedBy :brk;
+.
+
+brk:KadastraleGrootte a owl:class;
+  rdfs:label "Kadastrale grootte",
+    rdfs:label "Oppervlakte";
+  rdfs:comment "De oppervlakte van het perceel in centiare (vierkante meter), en de soort vaststelling van die oppervlakte."@nl;
+  rdfs:isDefinedBy :brk;
+.
+
+brk:SoortGrootte a owl:class;
+  rdfs:label "Soort grootte",
+    rdfs:label "Soort oppervlakte";
+  rdfs:comment "De soort vaststelling van de oppervlakte van een perceel."@nl;
+  rdfs:isDefinedBy :brk;
+.
+
+brk:Perceelnummerverschuiving a owl:Class;
+  rdfs:label "Perceelnummerverschuiving"@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:comment "Toename van de X- en Y-coördinaat van het perceelnummer op de kaart om het perceelnummer te verschuiven naar een locatie waar meer ruimte is om het nummer af te beelden."@nl;
 .
 
 brk:KadastraleGrens a owl:Class;
@@ -39,28 +150,107 @@ brk:KadastraleGrens a owl:Class;
   dct:subject brk_beg:KadastraleGrens;
 .
 
-brk:kadastraleGemeente a owl:ObjectProperty;
-  rdfs:label "kadastraleGemeente"@nl;
+### Properties
+
+brk:kadastraleAanduiding a owl:ObjectProperty;
+  rdfs:label "kadastrale aanduiding"@nl;
+  rdfs:comment "Een verwijzing naar de kadastrale aanduiding."@nl;
   rdfs:isDefinedBy :brk;
-  dct:subject brk_beg:KadastraleGemeente
+  rdfs:domain brk:OnroerendeZaak;
+  rdfs:range brk:KadastraleAanduiding;
+;
+
+brk:kadastraleGemeente a owl:ObjectProperty;
+  rdfs:label "kadastrale gemeente"@nl;
+  rdfs:comment "Een verwijzing naar de kadastrale gemeente."@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:KadastraleAanduiding;
+  rdfs:range brk:KadastraleGemeente;
+;
+
+brk:belastMet a owl:ObjectProperty;
+  rdfs:label "belast met"@nl;
+  rdfs:comment "Een verwijzing naar de van toepassing zijnde landinrichtingsrente."@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:OnroerendeZaak;
+  rdfs:range brk:Landinrichtingsrente;
+;
+
+brk:koopsom a owl:ObjectProperty;
+  rdfs:label "koopsom"@nl;
+  rdfs:comment "Een verwijzing naar de van toepassing zijnde koopsom."@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:OnroerendeZaak;
+  rdfs:range brk:Koopsom;
+;
+
+# brk:ontstaanUit a owl:ObjectProperty;
+  # rdfs:subPropertyOf prov:wasGeneratedBy;
+  # rdfs:label "ontstaan uit"@nl;
+  # rdfs:isDefinedBy :brk;
+  # rdfs:domain brk:OnroerendeZaak;
+  # rdfs:range brk:Onroerendezaakfiliatie;
+# ;
+
+# brk:overgegaanIn a owl:ObjectProperty;
+  # rdfs:subPropertyOf prov:wasInvalidatedBy;
+  # rdfs:label "overgegaan in"@nl;
+  # rdfs:isDefinedBy :brk;
+  # rdfs:domain brk:OnroerendeZaak;
+  # rdfs:range brk:Onroerendezaakfiliatie;
+# ;
+
+brk:oppervlak a owl:ObjectProperty;
+  rdfs:subPropertyOf ogc:hasGeometry;
+  rdfs:label "perceeloppervlak"@nl;
+  rdfs:comment "Verwijzing naar het vlak dat het perceel geografisch beschrijft."@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:Perceel;
+  rdfs:range ogc:Geometry;
 .
 
-brk:begrenzingPerceel a owl:ObjectProperty;
-  rdfs:label "begrenzingPerceel"@nl;
+brk:middelpunt a owl:ObjectProperty;
+  rdfs:subPropertyOf ogc:hasGeometry;
+  rdfs:label "centroïde"@nl, 
+    "middelpunt"@nl;
+  rdfs:comment "Verwijzing naar het geografisch middelpunt (de centroïde) van een perceel."@nl;
   rdfs:isDefinedBy :brk;
-  dct:subject brk_beg:BegrenzingPerceel
+  rdfs:domain brk:Perceel;
+  rdfs:range ogc:Geometry;
+.
+
+brk:leidingnetwerkgeometrie a owl:ObjectProperty;
+  rdfs:subPropertyOf ogc:hasGeometry;
+  rdfs:label "leidingnetwerkgeometrie"@nl;
+  rdfs:comment "Verwijzing naar een geometrie die een leidingnetwerk als vlak beschrijft."@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:Leidingnetwerk;
+  rdfs:range ogc:Geometry;
+.
+
+brk:leidingnetwerkhartlijn a owl:ObjectProperty;
+  rdfs:subPropertyOf ogc:hasGeometry;
+  rdfs:label "leidingnetwerkhartlijn"@nl 
+  rdfs:comment "Verwijzing naar een geometrie die een leidingnetwerk via de hartlijnen van de leidingen beschrijft."@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:Leidingnetwerk;
+  rdfs:range ogc:Geometry;
+.
+
+brk:kadastraleGrootte a owl:ObjectProperty;
+  rdfs:label "kadastrale grootte"@nl;
+  rdfs:comment "Verwijzing naar gegevens over de grootte (oppervlakte) van een perceel."@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:Perceel;
+  rdfs:range brk:KadastraleGrootte;
 .
 
 brk:soortGrootte a owl:ObjectProperty;
-  rdfs:label "soortGrootte"@nl;
+  rdfs:label "soort grootte"@nl;
+  rdfs:comment "Verwijzing naar de aanduiding van de soort grootte (oppervlakte) van een pervceel."@nl;
   rdfs:isDefinedBy :brk;
-  dct:subject brk_beg:SoortGrootte
-.
-
-brk:plaatscoordinaten a owl:ObjectProperty;
-  rdfs:label "plaatscoordinaten"@nl;
-  rdfs:isDefinedBy :brk;
-  dct:subject brk_beg:Plaatscoordinaten
+  rdfs:domain brk:KadastraleGrootte;
+  rdfs:range brk:SoortGrootte;
 .
 
 brk:typeGrens a owl:ObjectProperty;
@@ -84,17 +274,19 @@ brk:sectie a owl:DatatypeProperty;
 brk:perceelnummer a owl:DatatypeProperty;
   rdfs:label "perceelnummer"@nl;
   rdfs:isDefinedBy :brk;
-  dct:subject brk_beg:Perceelnummer
+  rdfs:range xsd:integer;
 .
 
-brk:kadastraleGrootte a owl:DatatypeProperty;
-  rdfs:label "kadastraleGrootte"@nl;
+brk:perceelnummerverschuiving a owl:DatatypeProperty;
+  rdfs:label "perceelnummerverschuiving"@nl;
+  rdfs:comment "Verwijzing naar de verschuiving van een perceelnummer."@nl;
   rdfs:isDefinedBy :brk;
-  dct:subject brk_beg:KadastraleGrootte
+  rdfs:domain brk:Perceel;
+  rdfs:range brk:Perceelnummerverschuiving;
 .
 
-brk:perceelnummerRotatie a owl:DatatypeProperty;
-  rdfs:label "perceelnummerRotatie"@nl;
+brk:perceelnummerrotatie a owl:DatatypeProperty;
+  rdfs:label "perceelnummerrotatie"@nl;
   rdfs:isDefinedBy :brk;
-  dct:subject brk_beg:PerceelnummerRotatie
+  dct:subject brk_beg:Perceelnummerrotatie
 .

@@ -1,8 +1,9 @@
+@prefix ex: <http://www.example.org/> .
+
 # common prefixes
 @prefix dct: <http://purl.org/dc/terms/> .
 @prefix doco: <http://purl.org/spar/doco/> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
-@prefix geom: <http://data.ign.fr/def/geometrie> .
 @prefix gml: <http://www.opengis.net/ont/gml#> .
 @prefix locn: <http://www.w3.org/ns/locn#> .
 @prefix ogc: <http://www.opengis.net/ont/geosparql#> .
@@ -23,5 +24,52 @@
 @prefix brk: <http://brk.basisregistraties.overheid.nl/def/brk#>.
 @prefix : <http://brk.basisregistraties.overheid.nl/def/>.
 
+## example without PROV-O
+ex:perceel_1 a brk:Perceel;
+  rdfs:label "perceel 1";
+  brk:overgegaanIn ex:filiatieA;
+.
 
+ex:perceel_2 a brk:Perceel;
+  rdfs:label "perceel 2";
+  brk:ontstaanUit ex:filiatieA;
+.
+
+ex:filiatie_A a brk:Onroerendezaakfiliatie;
+  brk:aard "Ruilverkaveling";
+  brk:overgangsgrootte "100":
+.
+
+## example with PROV-O
+# advantages:
+# 1) uses common vocabulary
+# 2)links in both directions
+
+ex:perceel_101 a brk:Perceel;
+  rdfs:label "perceel 101";
+  brk:wasInvalidatedBy ex:filiatie_B;
+  brk:kadastraleAanduiding ex:aanduiding_101;
+.
+
+ex:aanduiding_101 a brk:KadastraleAanduiding;
+  brk:perceelnummer "123";
+  brk:kadastraleGemeente ex:gemeente_1;
+.
+
+ex:gemeente_1 a brk:KadastraleGemeente;
+  brk:gemeentecode "10";
+  rdfs:label "Abbenbroek";
+;
+
+ex:perceel_101 a brk:Perceel;
+  rdfs:label "perceel 102";
+  brk:wasGeneratedBy ex:filiatie_B;
+.
+
+ex:filiatie_B a prov:Activity;
+  prov:used ex:perceel_101;
+  prov:generated perceel_102;
+  brk:aard "Ruilverkaveling";
+  brk:overgangsgrootte "100":
+;
 
