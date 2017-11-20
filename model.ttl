@@ -78,7 +78,7 @@ brk:Perceel a owl:Class;
     ogc:Feature;
   rdfs:label "Perceel"@nl,
     "Kadastraal perceel"@nl;
-  rdfs:comment "Een kadastraal perceel is een kadastraal geïdentificeerd en met kadastrale grenzen begrensd deel van het Nederlands grondgebied (art. 1 lid 1 Kadasterwet). Percelen worden cartografisch gerepresenteerd door een tweedimensionale vlakbegrenzing. Tussen alle kadastrale percelen in Nederland geldt een topologische relatie (opdelende vlakstructuur), d.w.z. dat naburige perceelsvlakken naadloos moeten aansluiten en elkaar niet mogen overlappen."
+  rdfs:comment "Een kadastraal perceel is een kadastraal geïdentificeerd en met kadastrale grenzen begrensd deel van het Nederlands grondgebied (art. 1 lid 1 Kadasterwet). Percelen worden cartografisch gerepresenteerd door een tweedimensionale vlakbegrenzing. Tussen alle kadastrale percelen in Nederland geldt een topologische relatie (opdelende vlakstructuur), d.w.z. dat naburige perceelsvlakken naadloos moeten aansluiten en elkaar niet mogen overlappen."@nl;
   rdfs:isDefinedBy :brk;
   dct:subject brk_beg:Perceel;
 .
@@ -103,7 +103,7 @@ brk:KadastraleAanduiding a owl:Class;
   rdfs:label "Kadastrale aanduiding"@nl;
   rdfs:comment """Kadastrale aanduiding is de unieke aanduiding van een onroerende zaak, die door het kadaster wordt vastgesteld.
 Percelen worden kadastraal aangeduid door vermelding van achtereenvolgens de kadastrale gemeente en sectie, waarin de percelen en gedeelten van percelen zijn gelegen waarvan het grondgebied tot die zaak behoort, alsmede de nummers van die percelen. Voor een onroerende zaak die zich krachtens een opstalrecht op, in of boven de grond van een ander bevindt, geldt dezelfde kadastrale aanduiding als van de onroerende zaak die met dat opstalrecht is bezwaard. Dit is van overeenkomstige toepassing op een onroerende zaak die zich op, in of boven de grond van een ander bevindt krachtens een recht als bedoeld in het voor 1 januari 1992 geldende artikel 5, derde lid, onder b, laatste zinsnede, van de Belemmeringenwet Privaatrecht.
-Appartementsrechten worden kadastraal aangeduid door de vermelding van achtereenvolgens de kadastrale gemeente en sectie, waarin de in de splitsing betrokken percelen zijn gelegen, de complexaanduiding en de appartementsindex. De complexaanduiding bestaat uit het voor de in de splitsing betrokken percelen vastgestelde complexnummer, gevolgd door de hoofdletter A. Onze Minister stelt regelen vast omtrent de vaststelling van het complexnummer."""@nl
+Appartementsrechten worden kadastraal aangeduid door de vermelding van achtereenvolgens de kadastrale gemeente en sectie, waarin de in de splitsing betrokken percelen zijn gelegen, de complexaanduiding en de appartementsindex. De complexaanduiding bestaat uit het voor de in de splitsing betrokken percelen vastgestelde complexnummer, gevolgd door de hoofdletter A. Onze Minister stelt regelen vast omtrent de vaststelling van het complexnummer."""@nl;
   rdfs:isDefinedBy :brk;
   dct:subject brk_beg:KadastraleGrens;
 .
@@ -134,8 +134,8 @@ brk:Onroerendezaakfiliatie a owl:Class;
 .
 
 brk:KadastraleGrootte a owl:class;
-  rdfs:label "Kadastrale grootte",
-    rdfs:label "Oppervlakte";
+  rdfs:label "Kadastrale grootte"@nl,
+    "Oppervlakte"@nl;
   rdfs:comment "De oppervlakte van het perceel in centiare (vierkante meter), en de soort vaststelling van die oppervlakte."@nl;
   rdfs:isDefinedBy :brk;
 .
@@ -162,9 +162,7 @@ brk:KadastraleGrens a owl:Class;
 
 brk:Aantekening a owl:Class;
   rdfs:label "Aantekening"@nl;
-  rdfs:comment "Een aantekening betreft een verwijzing naar een stuk. Een aantekening geeft aan welk feit
-er bestaat, genoemd in een stuk, dat gevolgen kan hebben voor de uitoefening van rechten op een onroerende
-zaak."
+  rdfs:comment "Een aantekening betreft een verwijzing naar een stuk. Een aantekening geeft aan welk feit er bestaat, genoemd in een stuk, dat gevolgen kan hebben voor de uitoefening van rechten op een onroerende zaak."@nl;
   rdfs:isDefinedBy :brk;
 .
 
@@ -188,8 +186,7 @@ brk:Stukdeel a owl:Class;
 brk:Kadasterstuk a owl:Class;
   rdfs:subClassOf brk:Stuk;
   rdfs:label "Kadasterstuk"@nl;
-  rdfs:comment "Een kadasterstuk is een stuk dat gevolgen kan hebben voor kadastrale en topografische
-registratie, maar dat niet ter inschrijving in de Openbare registers is aangeboden"@nl;
+  rdfs:comment "Een kadasterstuk is een stuk dat gevolgen kan hebben voor kadastrale en topografische registratie, maar dat niet ter inschrijving in de Openbare registers is aangeboden"@nl;
   rdfs:isDefinedBy :brk;
 .
 
@@ -215,7 +212,7 @@ brk:RedenVerzoek a owl:Class;
 brk:Ondertekenaar a owl:Class;
   rdfs:subClassOf foaf:Person;
   rdfs:label "Ondertekenaar"@nl;
-  rdfs:comment "Een persoon die een aangeboden stuk heeft ondertekend.";@nl;
+  rdfs:comment "Een persoon die een aangeboden stuk heeft ondertekend."@nl;
   rdfs:isDefinedBy :brk;
 .
 
@@ -268,7 +265,7 @@ brk:kadastraleAanduiding a owl:ObjectProperty;
   rdfs:isDefinedBy :brk;
   rdfs:domain brk:OnroerendeZaak;
   rdfs:range brk:KadastraleAanduiding;
-;
+.
 
 brk:kadastraleGemeente a owl:ObjectProperty;
   rdfs:label "kadastrale gemeente"@nl;
@@ -276,7 +273,7 @@ brk:kadastraleGemeente a owl:ObjectProperty;
   rdfs:isDefinedBy :brk;
   rdfs:domain brk:KadastraleAanduiding;
   rdfs:range brk:KadastraleGemeente;
-;
+.
 
 brk:belastMet a owl:ObjectProperty;
   rdfs:label "belast met"@nl;
@@ -284,7 +281,7 @@ brk:belastMet a owl:ObjectProperty;
   rdfs:isDefinedBy :brk;
   rdfs:domain brk:OnroerendeZaak;
   rdfs:range brk:Landinrichtingsrente;
-;
+.
 
 brk:koopsom a owl:ObjectProperty;
   rdfs:label "koopsom"@nl;
@@ -292,7 +289,7 @@ brk:koopsom a owl:ObjectProperty;
   rdfs:isDefinedBy :brk;
   rdfs:domain brk:OnroerendeZaak;
   rdfs:range brk:Koopsom;
-;
+.
 
 # brk:ontstaanUit a owl:ObjectProperty;
   # rdfs:subPropertyOf prov:wasGeneratedBy;
@@ -340,7 +337,7 @@ brk:leidingnetwerkgeometrie a owl:ObjectProperty;
 
 brk:leidingnetwerkhartlijn a owl:ObjectProperty;
   rdfs:subPropertyOf ogc:hasGeometry;
-  rdfs:label "leidingnetwerkhartlijn"@nl 
+  rdfs:label "leidingnetwerkhartlijn"@nl;
   rdfs:comment "Verwijzing naar een geometrie die een leidingnetwerk via de hartlijnen van de leidingen beschrijft."@nl;
   rdfs:isDefinedBy :brk;
   rdfs:domain brk:Leidingnetwerk;
@@ -374,18 +371,18 @@ brk:heeftBetrekkingOp a owl:ObjectProperty;
 brk:typeGrens a owl:ObjectProperty;
   rdfs:label "type"@nl;
   rdfs:isDefinedBy :brk;
-  dct:subject brk_beg:TypeGrens
+  dct:subject brk_beg:TypeGrens;
 .
 
 brk:grenslijn a owl:ObjectProperty;
   rdfs:label "grenslijn"@nl;
   rdfs:isDefinedBy :brk;
-  dct:subject brk_beg:Grenslijn
+  dct:subject brk_beg:Grenslijn;
 .
 
 brk:isAanvullingOp a owl:ObjectProperty;
   rdfs:label "is aanvulling op"@nl;
-  rdfs:comment "Verwijzing naar een stukdeel waarop dit stukdeel een aanvulling is."@nl
+  rdfs:comment "Verwijzing naar een stukdeel waarop dit stukdeel een aanvulling is."@nl;
   rdfs:isDefinedBy :brk;
   rdfs:domain brk:Stukdeel;
   rdfs:range brk:Stukdeel;
@@ -393,7 +390,7 @@ brk:isAanvullingOp a owl:ObjectProperty;
 
 brk:heeftKadasterverzoek  a owl:ObjectProperty;
   rdfs:label "heeft kadasterverzoek"@nl;
-  rdfs:comment "Verwijzing naar een kadasterverzoek."@nl
+  rdfs:comment "Verwijzing naar een kadasterverzoek."@nl;
   rdfs:isDefinedBy :brk;
   rdfs:domain brk:TerInschrijvingAangebodenStuk;
   rdfs:range brk:Kadasterverzoek;
@@ -401,7 +398,7 @@ brk:heeftKadasterverzoek  a owl:ObjectProperty;
 
 brk:heeftReden a owl:ObjectProperty;
   rdfs:label "heeft reden"@nl;
-  rdfs:comment "Verwijzing naar de reden voor een kadasterverzoek."@nl
+  rdfs:comment "Verwijzing naar de reden voor een kadasterverzoek."@nl;
   rdfs:isDefinedBy :brk;
   rdfs:domain brk:Kadasterverzoek;
   rdfs:range brk:RedenVerzoek;
