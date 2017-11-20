@@ -11,6 +11,7 @@
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://www.schema.org/> .
 @prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
 @prefix sh: <http://www.w3.org/ns/shacl#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
@@ -311,6 +312,97 @@ brk:ZekerheidsstellingHypothecair a owl:Class;
   rdfs:isDefinedBy :brk;
 .
 
+brk:BinnenlandsAdres a owl:Class;
+  rdfs:subClassOf locn:Address,
+    brk:HistorischVoorkomen;
+  rdfs:label "Binnenlands adres"@nl;
+  rdfs:comment "Een adres in Nederland."@nl; 
+  rdfs:isDefinedBy :brk;
+.
+
+brk:BuitenlandsAdres a owl:Class;
+  rdfs:subClassOf locn:Address,
+    brk:HistorischVoorkomen;
+  rdfs:label "Buitenlands adres"@nl;
+  rdfs:comment "Een adres buiten Nederland."@nl; 
+  rdfs:isDefinedBy :brk;
+.
+
+brk:Woonadres a owl:Class;
+  rdfs:subClassOf locn:Address,
+    brk:HistorischVoorkomen;
+  rdfs:label "Woonadres"@nl;
+  rdfs:comment "Een adres van een woonlocatie. Het adres kan binnenlands of buitenlands zijn."@nl; 
+  rdfs:isDefinedBy :brk;
+.
+
+brk:Postadres a owl:Class;
+  rdfs:subClassOf locn:Address,
+    brk:HistorischVoorkomen;
+  rdfs:label "Postadres"@nl;
+  rdfs:comment "Een adres dat geen woonlocatie aanduidt, maar waarop wel post ontvangen kan worden. Het adres kan binnenlands of buitenlands zijn."@nl; 
+  rdfs:isDefinedBy :brk;
+.
+
+brk:Erfpachtcanon a owl:Class;
+  rdfs:subClassOf brk:HistorischVoorkomen;
+  rdfs:label "Erfpachtcanon"@nl;
+  rdfs:comment "De vergoeding die een erfpachter betaald voor het in gebruik hebben van een onroerende zaak."
+  rdfs:isDefinedBy :brk;
+.
+
+brk:ZakelijkRecht a owl:Class;
+  rdfs:subClassOf brk:HistorischVoorkomen;
+  rdfs:label "Zakelijk recht"@nl;
+  rdfs:comment "Een zakelijk recht is een door een complex van rechtsregels verleende en beschermende bevoegdheid van een persoon. Het meest omvattende recht dat een persoon op een onroerende zaak kan hebben is de eigendom (art. 5:1 BW). Uit dit recht kunnen beperkte rechten worden afgeleid en hiermee worden bezwaard (art. 3:8 BW). Beperkte rechten zijn te vinden in de boeken 3 en 5 BW. (erfpacht, opstal, vruchtgebruik), zijn rechten van voor 1992 (beklemrecht en zakelijk recht als bedoeld in de Belemmeringenwet privaatrecht) en zijn oud vaderlandse rechten (bijv. visrechten, grondrente). Een recht kan ook een oud-Hollands recht zijn."@nl;
+  rdfs:isDefinedBy :brk;
+.
+
+brk:Mandeligheid a owl:Class;
+  rdfs:subClassOf brk:HistorischVoorkomen;
+  rdfs:label "Mandeligheid"@nl;
+  rdfs:comment "Mandeligheid is het ontstaan van een gemeenschappelijk eigendom van een onroerende zaak, van eigenaars van twee of meer erven, doordat de bestemming van het gemeenschappelijk nut is vastgelegd in een tussen de eigenaars opgemaakte notariële akte en dat deze akte is ingeschreven in de openbare registers."@nl;
+  rdfs:isDefinedBy :brk;
+.
+
+brk:Appartementsrechtsplitsing a owl:Class;
+  rdfs:subClassOf brk:HistorischVoorkomen;
+  rdfs:label "Appartementsrechtsplitsing"@nl;
+  rdfs:comment "Het recht op een stuk grond of op een gebouw met toebehoren op de daarbij behorende grond met toebehoren kan worden gesplitst in appartementsrechten. Een appartementsrechtsplitsing beoogt ten behoeve van een splitsing in appartementsrechten, de in de splitsing betrokken rechten administratief samen te voegen. De appartementsrechtsplitsing omvat het geheel van rechten op een of meer kadastrale objecten dat is (onder)gesplitst in appartementsrechten. Een appartementsrechtsplitsing is een hoofdsplitsing of een ondersplitsing of een splitsing afkoop erfpacht."@nl;
+  rdfs:isDefinedBy :brk;
+.
+
+brk:Hoofdsplitsing a owl:Class;
+  rdfs:subClassOf brk:Appartementsrechtsplitsing;
+  rdfs:label "Hoofdsplitsing"@nl;
+  rdfs:comment "Een hoofdsplitsing vormt het geheel van rechten op een of meer percelen, dat is gesplitst in appartementsrechten. De hoofdsplitsing kent een 'hoofdvereniging van eigenaren'. De tekening van het complex is samen met de akte van splitsing ingeschreven in de openbare registers."@nl;
+  rdfs:isDefinedBy :brk;
+.
+
+brk:Ondersplitsing a owl:Class;
+  rdfs:subClassOf brk:Appartementsrechtsplitsing;
+  rdfs:label "Ondersplitsing"@nl;
+  rdfs:comment "Een onderSplitsing vormt het geheel van rechten op een appartementsrecht, dat is ondergesplitst. De ondersplitsing kent een eigen Vereniging van Eigenaren. Deze vereniging opereert binnen de bevoegdheid van het hoofdvereniging en vertegenwoordigt het aandeel van het ondergesplitste appartementsrecht in het hoofdcomplex."@nl;
+  rdfs:isDefinedBy :brk;
+.
+
+brk:SpiegelsplitsingAfkoopErfpacht a owl:Class;
+  rdfs:subClassOf brk:Appartementsrechtsplitsing;
+  rdfs:label "Spiegelsplitsing afkoop erfpacht"@nl;
+  rdfs:comment """Een spiegelsplitsing afkoop erfpacht vormt het geheel van de bloot-eigendom van een of meer percelen, dat is gesplitst in appartementsrechten.
+  In grote steden is in het verleden beleid geweest dat de grond niet in eigendom was te verkrijgen maar dat men alleen erfpacht kon verwerven. In veel gevallen is bij splitsing in appartementsrechten de erfpacht gesplitst. De bloot-eigendom van het grondperceel is niet in de splitsing betrokken en berust bij de gemeente.
+  In Rotterdam is het beleid enkele jaren geleden gewijzigd. Daar is het mogelijk geworden dat de erfpachter op zijn/haar wens de erfpacht mag afkopen (ook de bloot-eigendom verkrijgen) zodat hij/zij een volledig recht van eigendom heeft.
+  In het geval een of meer eigenaren van een appartementsrecht de erfpacht willen afkopen wordt de bloot-eigendom van het grondperceel eveneens gesplitst in appartementsrechten.
+  De bloot-eigendom wordt gesplitst in even zoveel appartementsrechten als er aanwezig zijn bij de splitsing van de erfpacht. Splitsing van de bloot-eigendom vindt plaats onder dezelfde complexaanduiding als de splitsing erfpacht, er is geen nieuwe tekening nodig. De splitsingafkooperfpacht kent een eigen vereniging van eigenaren"""@nl;
+  rdfs:isDefinedBy :brk;
+.
+
+brk:Hoofdzaak a owl:Class;
+  rdfs:label "Hoofdzaak"@nl;
+  rdfs:comment "Hoofdzaak geeft aan welke onroerende zaken een (aandeel in) mandeligheid omvatten."@nl;
+  rdfs:isDefinedBy :brk;
+.
+
 
 ##### Properties
 ## Notes for properties:
@@ -341,8 +433,8 @@ brk:kadastraleGemeente a owl:ObjectProperty;
   rdfs:range brk:KadastraleGemeente;
 .
 
-brk:belastMet a owl:ObjectProperty;
-  rdfs:label "belast met"@nl;
+brk:landinrichtingsrente a owl:ObjectProperty; #in CDMKAD: belastMet. Renamed because isBelastMet is also defined in CDMKAD, which could be confusing.
+  rdfs:label "landinrichtingsrente"@nl;
   rdfs:comment "Een verwijzing naar de van toepassing zijnde landinrichtingsrente."@nl;
   rdfs:isDefinedBy :brk;
   rdfs:domain brk:OnroerendeZaak;
@@ -382,7 +474,8 @@ brk:aardOnroerendezaakfiliatie a owl:ObjectProperty;
 .
 
 brk:perceeloppervlak a owl:ObjectProperty;
-  rdfs:subPropertyOf ogc:hasGeometry;
+  rdfs:subPropertyOf ogc:hasGeometry,
+    locn:geometry;
   rdfs:label "perceeloppervlak"@nl;
   rdfs:comment "Verwijzing naar het vlak dat het perceel geografisch beschrijft."@nl;
   rdfs:isDefinedBy :brk;
@@ -391,7 +484,8 @@ brk:perceeloppervlak a owl:ObjectProperty;
 .
 
 brk:middelpunt a owl:ObjectProperty;
-  rdfs:subPropertyOf ogc:hasGeometry;
+  rdfs:subPropertyOf ogc:hasGeometry,
+    locn:geometry;
   rdfs:label "centroïde"@nl, 
     "middelpunt"@nl;
   rdfs:comment "Verwijzing naar het geografisch middelpunt (de centroïde) van een perceel."@nl;
@@ -401,7 +495,8 @@ brk:middelpunt a owl:ObjectProperty;
 .
 
 brk:leidingnetwerkgeometrie a owl:ObjectProperty;
-  rdfs:subPropertyOf ogc:hasGeometry;
+  rdfs:subPropertyOf ogc:hasGeometry,
+    locn:geometry;
   rdfs:label "leidingnetwerkgeometrie"@nl;
   rdfs:comment "Verwijzing naar een geometrie die een leidingnetwerk als vlak beschrijft."@nl;
   rdfs:isDefinedBy :brk;
@@ -410,7 +505,8 @@ brk:leidingnetwerkgeometrie a owl:ObjectProperty;
 .
 
 brk:leidingnetwerkhartlijn a owl:ObjectProperty;
-  rdfs:subPropertyOf ogc:hasGeometry;
+  rdfs:subPropertyOf ogc:hasGeometry,
+    locn:geometry;
   rdfs:label "leidingnetwerkhartlijn"@nl;
   rdfs:comment "Verwijzing naar een geometrie die een leidingnetwerk via de hartlijnen van de leidingen beschrijft."@nl;
   rdfs:isDefinedBy :brk;
@@ -432,14 +528,6 @@ brk:soortGrootte a owl:ObjectProperty;
   rdfs:isDefinedBy :brk;
   rdfs:domain brk:KadastraleGrootte;
   rdfs:range skos:Concept;
-.
-
-brk:heeftBetrekkingOp a owl:ObjectProperty;
-  rdfs:label "heeft betrekking op"@nl;
-  rdfs:comment "Verwijzing naar de onroerende zaak waarop de aantekenign betrekking heeft";
-  rdfs:isDefinedBy :brk;
-  rdfs:domain brk:Aantekening;
-  rdfs:range brk:OnroerendeZaak;
 .
 
 brk:typeGrens a owl:ObjectProperty;
@@ -502,15 +590,43 @@ brk:acgidentificatie a owl:ObjectProperty;
   rdfs:range brk:Acgidentificatie;
 .
 
-brk:isVermeldIn a owl:ObjectProperty;
-  rdfs:label "is vermeld in"@nl;
+brk:persoonVermeldIn a owl:ObjectProperty;
+  rdfs:subPropertyOf schema:mentions;
+  rdfs:label "persoon vermeld in"@nl;
   rdfs:comment "Verwijzing naar een stukdeel waarin deze persoon is vermeld."@nl;
   rdfs:isDefinedBy :brk;
   rdfs:domain brk:Persoon;
-  rdfs:range brk:Kadasterstuk;
+  rdfs:range brk:Stukdeel;
 .
 
-brk:aardAantekenig a owl:ObjectProperty;
+brk:aantekeningVermeldIn a owl:ObjectProperty;
+  rdfs:subPropertyOf schema:mentions;
+  rdfs:label "aantekening vermeld in"@nl;
+  rdfs:comment "Verwijzing naar een stukdeel waarin deze aantekening is vermeld."@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:Aantekening;
+  rdfs:range brk:Stukdeel;
+.
+
+brk:zekerheidsstellingVermeldIn a owl:ObjectProperty;
+  rdfs:subPropertyOf schema:mentions;
+  rdfs:label "zekerheidsstelling vermeld in"@nl;
+  rdfs:comment "Verwijzing naar een stukdeel waarin deze zekerheidsstelling is vermeld."@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:Zekerheidsstelling;
+  rdfs:range brk:Stukdeel;
+.
+
+brk:tenaamstellingVermeldIn a owl:ObjectProperty;
+  rdfs:subPropertyOf schema:mentions;
+  rdfs:label "tenaamstelling vermeld in"@nl;
+  rdfs:comment "Verwijzing naar een stukdeel waarin deze tenaamstelling is vermeld."@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:Tenaamstelling;
+  rdfs:range brk:Stukdeel;
+.
+
+brk:aardAantekening a owl:ObjectProperty;
   rdfs:label "aard aantekening"@nl;
   rdfs:comment "De aard van de aantekening."@nl;
   rdfs:isDefinedBy :brk;
@@ -533,8 +649,9 @@ brk:bijOnroerendeZaak a owl:ObjectProperty; # in CDMKAD: aantekeningKadastraalOb
   rdfs:range brk:OnroerendeZaak;
 .
 
-brk:isGebaseeerdOpStukdeel a owl:ObjectProperty;
-  rdfs:label "is gebaseerd op stukdeel"@nl;
+brk:aantekeningIsGebaseeerdOp a owl:ObjectProperty;
+  rdfs:subPropertyOf schema:isBasedOn;
+  rdfs:label "aantekening is gebaseerd op"@nl;
   rdfs:comment "Verwijzing naar het stukdeel waarop de aantekening is gebaseerd."@nl;
   rdfs:isDefinedBy :brk;
   rdfs:domain brk:Aantekening;
@@ -564,7 +681,6 @@ brk:verkregenNamensSamenwerkingsverband a owl:ObjectProperty;
   rdfs:domain brk:Tenaamstelling;
   rdfs:range skos:Concept;
 .
-
 
 brk:aantekeningRecht a owl:ObjectProperty;
   rdfs:label "aantekening recht"@nl;
@@ -615,7 +731,8 @@ brk:erfdienstbaarheid a owl:ObjectProperty;
 .
 
 brk:oppervlakAantekeninggebied a owl:ObjectProperty;
-  rdfs:subPropertyOf ogc:hasGeometry;
+  rdfs:subPropertyOf ogc:hasGeometry,
+    locn:geometry;
   rdfs:label "oppervlak aantekeninggebied"@nl;
   rdfs:comment "Verwijzing naar het vlak dat het aantekeninggebied geografisch beschrijft."@nl;
   rdfs:isDefinedBy :brk;
@@ -624,7 +741,8 @@ brk:oppervlakAantekeninggebied a owl:ObjectProperty;
 .
 
 brk:oppervlakDienendErfAantekeninggebied a owl:ObjectProperty;
-  rdfs:subPropertyOf ogc:hasGeometry;
+  rdfs:subPropertyOf ogc:hasGeometry,
+    locn:geometry;
   rdfs:label "oppervlak dienend erf aantekeninggebied"@nl;
   rdfs:comment "Verwijzing naar het vlak dat het dienend erf van het aantekeninggebied geografisch beschrijft. Het dienend erf is het door het Kadaster vastgestelde gebied ten laste waarvan de erfdienstbaarheid is gevestigd."@nl;
   rdfs:isDefinedBy :brk;
@@ -633,7 +751,8 @@ brk:oppervlakDienendErfAantekeninggebied a owl:ObjectProperty;
 .
 
 brk:oppervlakHeersendErfAantekeninggebied a owl:ObjectProperty;
-  rdfs:subPropertyOf ogc:hasGeometry;
+  rdfs:subPropertyOf ogc:hasGeometry,
+    locn:geometry;
   rdfs:label "oppervlak heersend erf aantekeninggebied"@nl;
   rdfs:comment "Verwijzing naar het vlak dat het heersend erf van het aantekeninggebied geografisch beschrijft. Het heersend erf is het door het Kadaster vastgestelde gebied ten behoeve waarvan de erfdienstbaarheid is gevestigd."@nl;
   rdfs:isDefinedBy :brk;
@@ -663,6 +782,56 @@ brk:betrokkenRecht a owl:ObjectProperty;
   rdfs:isDefinedBy :brk;
   rdfs:domain brk:Zekerheidsstelling;
   rdfs:range skos:Concept;
+.
+
+brk:soortErfpachtcanon a owl:ObjectProperty;
+  rdfs:label "soort erfpachtcanon"@nl;
+  rdfs:comment "Verwijzing naar het soort erfpachtcanon."@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:Erfpachtcanon;
+  rdfs:range skos:Concept;
+.
+
+brk:erfpachtcanonIsGebaseeerdOp a owl:ObjectProperty;
+  rdfs:subPropertyOf schema:isBasedOn;
+  rdfs:label "erfpachtcanon is gebaseerd op"@nl;
+  rdfs:comment "Verwijzing naar het stukdeel waarop de erfpachtcanon is gebaseerd."@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:Erfpachtcanon;
+  rdfs:range brk:Stukdeel;
+.
+
+brk:erfpachtcanonVermeldIn a owl:ObjectProperty;
+  rdfs:subPropertyOf schema:mentions;
+  rdfs:label "erfpachtcanon vermeld in"@nl;
+  rdfs:comment "Verwijzing naar een stukdeel waarin dit erfpachtcanon is vermeld."@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:Erfpachtcanon;
+  rdfs:range brk:Stukdeel;
+.
+
+brk:aardZakelijkRecht owl:ObjectProperty;
+  rdfs:label "aard zakelijk recht"@nl;
+  rdfs:comment "Verwijzing naar de aard van het zakelijk recht."@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:ZakelijkRecht;
+  rdfs:range skos:Concept;
+.
+
+brk:isBelastMet owl:ObjectProperty;
+  rdfs:label "is belast met"@nl;
+  rdfs:comment "Verwijzing naar een zakelijk recht waarmee dit zakelijk recht is belast."@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:ZakelijkRecht;
+  rdfs:range brk:ZakelijkRecht;
+.
+
+brk:isBestemdTot owl:ObjectProperty;
+  rdfs:label "is bestemd tot"@nl;
+  rdfs:comment "Verwijzing naar een mandeligheid waartoe dit zakelijk recht is bestemd."@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:ZakelijkRecht;
+  rdfs:range brk:Mandeligheid;
 .
 
 ## Datatype Properties
