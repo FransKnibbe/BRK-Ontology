@@ -47,7 +47,7 @@ ex:filiatie_A a brk:Onroerendezaakfiliatie;
 
 ex:perceel_101 a brk:Perceel;
   rdfs:label "perceel 101";
-  brk:wasInvalidatedBy ex:filiatie_B;
+  brk:wasInvalidatedBy ex:perceelfiliatie_B;
   brk:kadastraleAanduiding ex:aanduiding_101;
 .
 
@@ -63,13 +63,36 @@ ex:gemeente_1 a brk:KadastraleGemeente;
 
 ex:perceel_101 a brk:Perceel;
   rdfs:label "perceel 102";
-  brk:wasGeneratedBy ex:filiatie_B;
+  brk:wasGeneratedBy ex:perceelfiliatie_B;
 .
 
-ex:filiatie_B a prov:Activity;
+ex:perceelfiliatie_B a prov:Activity;
   prov:used ex:perceel_101;
   prov:generated perceel_102;
-  brk:aard "Ruilverkaveling";
+  brk:aardOnroerendezaakfiliatie ro_beg:Ruilverkaveling;
   brk:overgangsgrootte "100":
 ;
+
+ex:tenaamstelling_1 a brk:Tenaamstelling;
+  brk:wasInvalidatedBy ex:tenaamstellingsfiliatie_1;
+.
+
+ex:tenaamstelling_2 a brk:Tenaamstelling;
+  brk:wasInvalidatedBy ex:tenaamstellingsfiliatie_1;
+.
+
+ex:tenaamstelling_3 a brk:Tenaamstelling;
+  brk:wasGeneratedBy ex:tenaamstellingsfiliatie_1;
+.
+
+ex:tenaamstellingsfiliatie_1 a brk:Tenaamstellingsfiliatie;
+  prov:used tenaamstelling_1,
+    tenaamstelling_2;
+  prov:generated tenaamstelling_3;
+  brk:redenTenaamstellingsfiliatie brk_beg:Samengevoegd;
+;
+
+
+
+
 

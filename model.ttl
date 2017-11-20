@@ -32,12 +32,11 @@
 # > How should OnroerendeZaak and Appartementsrecht be related?
 
 
-
 ##### This ontology
 
 :brk a owl:Ontology;
   rdfs:label "vocabulaire voor de Basisregistratie Kadaster (BRK)"@nl;
-  rdfs:comment "Dit vocabulaire is gebaseerd op het Canoniek Domeinmodel voor BRK (CDMKAD), versie september 2016, en het Productmodel Basisregistratie Kadaster Levering, versie 20150101."@nl;
+  rdfs:comment "Dit vocabulaire is gebaseerd op het Canoniek Domeinmodel voor BRK (CDMKAD), versie september 2016, het Productmodel Basisregistratie Kadaster Levering, versie 20150101 en het Informatiemodel Kadaster (IMKAD), versie 2.1."@nl;
   owl:versionInfo "0.0.1"@nl;
   rdfs:seeAlso <https://brk.basisregistraties.overheid.nl/>;
   sh:shapesGraph :brk_str;
@@ -169,7 +168,8 @@ brk:Aantekening a owl:Class;
 brk:Stuk a owl:Class;
   rdfs:subClassOf foaf:Document,
     dbpo:Document,
-    bibo:Document;
+    bibo:Document,
+    brk:HistorischVoorkomen;
   rdfs:label "Stuk"@nl;
   rdfs:comment "Een Kadastraal stuk is een brondocument dat aanleiding geeft tot een wijziging van de gegevens in de BRK"@nl;
   rdfs:isDefinedBy :brk;
@@ -177,7 +177,8 @@ brk:Stuk a owl:Class;
 
 brk:Stukdeel a owl:Class;
   rdfs:subClassOf bibo:DocumentPart,
-    doco:Section;
+    doco:Section,
+    brk:HistorischVoorkomen;
   rdfs:label "Stukdeel"@nl;
   rdfs:comment "Een Stukdeel is een (zelfstandig te onderkennen) deel van een stuk, op grond waarvan gegevens in de kadastrale registratie ontstaan, wijzigen, vervallen of worden aangevuld. Als in een stuk bijvoorbeeld is vermeld dat er verschillende rechten betrokken zijn bij verschillende leveringen (tegen verschillende koopsommen) dan worden die fragmenten uit de tekst van die akte als verschillende stukdelen onderkend. Dergelijke stukdelen kunnen in de toekomst afzonderlijk worden aangevuld, doorgehaald, en dergelijke. Een stukdeel komt vaak overeen met een rechtsfeit."@nl;
   rdfs:isDefinedBy :brk;
@@ -198,6 +199,7 @@ brk:TerInschrijvingAangebodenStuk a owl:Class;
 .
 
 brk:Kadasterverzoek a owl:Class;
+  rdfs:subClassOf brk:HistorischVoorkomen;
   rdfs:label "Kadasterverzoek"@nl;
   rdfs:comment "Een kadasterverzoek is een verzoek van het Kadaster aan de aanbieder van een ter inschrijving aangeboden stuk in verband met de afhandeling van het stuk."@nl;
   rdfs:isDefinedBy :brk;
@@ -223,6 +225,7 @@ brk:Acgidentificatie a owl:Class;
 .
 
 brk:Persoon a owl:Class;
+  rdfs:subClassOf brk:HistorischVoorkomen;
   rdfs:label "Persoon"@nl;
   rdfs:comment "Iets dat rechten en plichten kan hebben."@nl;
   rdfs:isDefinedBy :brk;
@@ -243,10 +246,73 @@ brk:NietnatuurlijkPersoon a owl:Class;
   rdfs:subClassOf brk:Persoon;
 .
 
-  
-  
-  
-##### 
+# There is a logical clash between the definition of Aantekening and it being a spatial object (ogc:Feature). That is 
+# why class brk:Aantekeningsgebied is defined in this ontology.
+brk:Aantekening a owl:Class;
+  rdfs:subClassOf brk:HistorischVoorkomen;
+  rdfs:label "Aantekening"@nl;
+  rdfs:comment "Een aantekening betreft een verwijzing naar een stuk. Een aantekening geeft aan welk feit er bestaat, genoemd in een stuk, dat gevolgen kan hebben voor de uitoefening van rechten op de onroerende zaak."@nl;
+  rdfs:isDefinedBy :brk;
+.
+
+# Aantekeninggebied can have three different geometries (see property definitions)
+brk:Aantekeningsgebied a owl:Class;
+  rdfs:subClassOf 
+    brk:HistorischVoorkomen, # not sure about this, but this is put here in case this spatial object has provenance data.
+    ogc:Feature;
+  rdfs:label "Aantekeningsgebied"@nl;
+  rdfs:comment "Het gebied waar de aanteking betrekking op heeft."@nl;
+  rdfs:isDefinedBy :brk;
+.
+
+brk:Tenaamstelling a owl:Class;
+  rdfs:subClassOf brk:HistorischVoorkomen;
+  rdfs:label "Tenaamstelling"@nl;
+  rdfs:comment "Een tenaamstelling vormt de relatie tussen een recht en een persoon en geeft aan welk recht, met uitzondering van hypotheek en beslag, door een persoon wordt uitgeoefend op een onroerend goed. Een tenaamstelling heeft betrekking op het eigendom of een beperkt recht van die persoon van één onroerend goed. Met een beperkt recht op een onroerend goed wordt erfpacht, opstal, e.d. bedoeld, maar ook  huur en lease (van luchtvaartuigen). Ook rechten die zijn verkregen onder ontbindende voorwaarden worden beschouwd als een vorm van recht."@nl;
+  rdfs:isDefinedBy :brk;
+.
+
+brk:Tenaamstellingsfiliatie a owl:Class;
+  rdfs:subClassOf prov:Activitiy;
+  rdfs:label "Tenaamstellingsfiliatie"@nl;
+  rdfs:comment "Geeft aan uit welke inmiddels vervallen tenaamstellingen de tenaamstelling is ontstaan. Dit wordt gebruikt om aan te geven hoe een recht (historisch) tot stand gekomen is. Het geeft aan waarom de ene tenaamstelling gerelateerd is aan de andere. Dit doet zich voor bij het ambtshalve samenvoegen van rechten, bij vererving, naamswijziging etc."@nl;
+  rdfs:isDefinedBy :brk;
+.
+
+# The definition of this class is unclear and needs to be improved.
+brk:GezamenlijkAandeel a owl:Class;
+  rdfs:subClassOf brk:HistorischVoorkomen;
+  rdfs:label "Gezamenlijk aandeel"@nl;
+  rdfs:comment "Twee of meer personen kunnen gezamenlijk een aandeel hebben in een zakelijk recht, waarbij het afzonderlijke aandeel in het gezamenlijk aandeel niet bekend is (als gezamenlijk aandeel bekend is dan is het individuele aandeel niet bekend en omgekeerd)."@nl; 
+  rdfs:isDefinedBy :brk;
+.
+
+# A definition could not be found, it needs to be added.
+brk:Zekerheidsstelling a owl:Class;
+  rdfs:subClassOf brk:HistorischVoorkomen;
+  rdfs:label "Zekerheidsstelling"@nl;
+  rdfs:comment ""@nl; 
+  rdfs:isDefinedBy :brk;
+.
+
+# A definition could not be found, it needs to be added.
+brk:ZekerheidsstellingInzakeBeslag a owl:Class;
+  rdfs:subClassOf brk:Zekerheidsstelling;
+  rdfs:label "Zekerheidsstelling inzake beslag"@nl;
+  rdfs:comment ""@nl; 
+  rdfs:isDefinedBy :brk;
+.
+
+# A definition could not be found, it needs to be added.
+brk:ZekerheidsstellingHypothecair a owl:Class;
+  rdfs:subClassOf brk:Zekerheidsstelling;
+  rdfs:label "Hypothecaire zekerheidsstelling"@nl;
+  rdfs:comment ""@nl; 
+  rdfs:isDefinedBy :brk;
+.
+
+
+##### Properties
 ## Notes for properties:
 #
 # 1) It does not seem necessary to define the relationship between Stuk and Stukdeel in this ontology
@@ -307,7 +373,15 @@ brk:koopsom a owl:ObjectProperty;
   # rdfs:range brk:Onroerendezaakfiliatie;
 # ;
 
-brk:oppervlak a owl:ObjectProperty;
+brk:aardOnroerendezaakfiliatie a owl:ObjectProperty;
+  rdfs:label "aard onroerendezaakfiliatie"@nl;
+  rdfs:comment "De aard van de overgang tussen onroerende zaken."@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:Onroerendezaakfiliatie;
+  rdfs:range skos:Concept;
+.
+
+brk:perceeloppervlak a owl:ObjectProperty;
   rdfs:subPropertyOf ogc:hasGeometry;
   rdfs:label "perceeloppervlak"@nl;
   rdfs:comment "Verwijzing naar het vlak dat het perceel geografisch beschrijft."@nl;
@@ -434,6 +508,161 @@ brk:isVermeldIn a owl:ObjectProperty;
   rdfs:isDefinedBy :brk;
   rdfs:domain brk:Persoon;
   rdfs:range brk:Kadasterstuk;
+.
+
+brk:aardAantekenig a owl:ObjectProperty;
+  rdfs:label "aard aantekening"@nl;
+  rdfs:comment "De aard van de aantekening."@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:Aantekening;
+  rdfs:range skos:Concept;
+.
+
+brk:betrokkenPersoon a owl:ObjectProperty;
+  rdfs:label "betrokken persoon"@nl;
+  rdfs:comment "Verwijzing naar de bij een aantekening betrokken persoon."@nl;
+  rdfs:domain brk:Aantekening;
+  rdfs:range brk:Persoon;
+.
+
+brk:bijOnroerendeZaak a owl:ObjectProperty; # in CDMKAD: aantekeningKadastraalObject
+  rdfs:label "bij onroerende zaak"@nl;
+  rdfs:comment "Verwijzing naar de onroerende zaak waarop de aantekening betrekking heeft."@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:Aantekening;
+  rdfs:range brk:OnroerendeZaak;
+.
+
+brk:isGebaseeerdOpStukdeel a owl:ObjectProperty;
+  rdfs:label "is gebaseerd op stukdeel"@nl;
+  rdfs:comment "Verwijzing naar het stukdeel waarop de aantekening is gebaseerd."@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:Aantekening;
+  rdfs:range brk:Stukdeel;
+.
+
+brk:tenNameVan a  owl:ObjectProperty;
+  rdfs:label "ten name van"@nl;
+  rdfs:comment "Verwijzing naar de persoon die bij de tenaamstelling is geregistreerd."@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:Tenaamstelling;
+  rdfs:range brk:Persoon;
+.
+
+brk:burgerlijkeStaatTenTijdeVanVerkrijging a owl:ObjectProperty;
+  rdfs:label "burgerlijke staat ten tijde van verkrijging"@nl;
+  rdfs:comment "De burgerlijke staat van de persoon die bij de tenaamstelling is geregistreerd op het moment dat de tenaamstelling werd verkregen."@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:Tenaamstelling;
+  rdfs:range skos:Concept;
+.
+
+brk:verkregenNamensSamenwerkingsverband a owl:ObjectProperty;
+  rdfs:label "verkregen namens samenwerkingsverband"@nl;
+  rdfs:comment "Verwijzing naar de aard van het samenwerkingsverband (zoals Maatschap, VOF of CV) namens welke een natuurlijk persoon deze tenaamstelling heeft verkregen."@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:Tenaamstelling;
+  rdfs:range skos:Concept;
+.
+
+
+brk:aantekeningRecht a owl:ObjectProperty;
+  rdfs:label "aantekening recht"@nl;
+  rdfs:comment "Verwijzing naar een tenaamstelling van de aantekening."@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:Aantekening;
+  rdfs:range brk:Tenaamstelling;
+.
+
+brk:betrokkenPartner a owl:ObjectProperty;
+  rdfs:label "betrokken partner"@nl;
+  rdfs:comment "Verwijzing naar de partner van de persoon die bij de tenaamstelling is geregistreerd."@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:Tenaamstelling;
+  rdfs:range brk:NatuurlijkPersoon;
+.
+
+brk:betrokkenSamenwerkingsverband a owl:ObjectProperty;
+  rdfs:label "betrokken samenwerkingsverband"@nl;
+  rdfs:comment "Verwijzing naar een samenwerkingsverband waarin de persoon die bij de tenaamstelling is geregistreerd is betrokken."@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:Tenaamstelling;
+  rdfs:range brk:NietnatuurlijkPersoon;
+.
+
+brk:redenTenaamstellingsfiliatie a owl:ObjectProperty;
+  rdfs:label "redenTenaamstellingsfiliatie"@nl;
+  rdfs:comment "De reden van overgang tussen tenaamstellingen."@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:Tenaamstellingsfiliatie;
+  rdfs:range skos:Concept;
+.
+
+brk:geldtVoor a owl:ObjectProperty;
+  rdfs:label "geldt voor"@nl;
+  rdfs:comment "Verwijzing naar het gezamenlijk aandeel van de bij de tenaamstelling geregistreerde personen."@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:Tenaamstelling;
+  rdfs:range brk:GezamenlijkAandeel;
+.
+
+brk:erfdienstbaarheid a owl:ObjectProperty;
+  rdfs:label "erfdienstbaarheid"@nl;
+  rdfs:comment "Aanduiding van de erfdienstbaarheid van een Aantekening."@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:Aantekening;
+  rdfs:range skos:Concept;
+.
+
+brk:oppervlakAantekeninggebied a owl:ObjectProperty;
+  rdfs:subPropertyOf ogc:hasGeometry;
+  rdfs:label "oppervlak aantekeninggebied"@nl;
+  rdfs:comment "Verwijzing naar het vlak dat het aantekeninggebied geografisch beschrijft."@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:Aantekeninggebied;
+  rdfs:range ogc:Geometry;
+.
+
+brk:oppervlakDienendErfAantekeninggebied a owl:ObjectProperty;
+  rdfs:subPropertyOf ogc:hasGeometry;
+  rdfs:label "oppervlak dienend erf aantekeninggebied"@nl;
+  rdfs:comment "Verwijzing naar het vlak dat het dienend erf van het aantekeninggebied geografisch beschrijft. Het dienend erf is het door het Kadaster vastgestelde gebied ten laste waarvan de erfdienstbaarheid is gevestigd."@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:Aantekeninggebied;
+  rdfs:range ogc:Geometry;
+.
+
+brk:oppervlakHeersendErfAantekeninggebied a owl:ObjectProperty;
+  rdfs:subPropertyOf ogc:hasGeometry;
+  rdfs:label "oppervlak heersend erf aantekeninggebied"@nl;
+  rdfs:comment "Verwijzing naar het vlak dat het heersend erf van het aantekeninggebied geografisch beschrijft. Het heersend erf is het door het Kadaster vastgestelde gebied ten behoeve waarvan de erfdienstbaarheid is gevestigd."@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:Aantekeninggebied;
+  rdfs:range ogc:Geometry;
+.
+
+brk:aantekeningZekerheidsstelling a owl:ObjectProperty;
+  rdfs:label "aantekening "@nl;
+  rdfs:comment "Verwijzing naar een zekerheidsstelling die bij bij een aantekening hoort."@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:Aantekening;
+  rdfs:range brk:Zekerheidsstelling;
+.
+
+brk:aardBeslag a owl:ObjectProperty;
+  rdfs:label "aard beslag"@nl;
+  rdfs:comment "De aard van het beslag."@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:ZekerheidsstellingInzakeBeslag;
+  rdfs:range skos:Concept;
+.
+
+brk:betrokkenRecht a owl:ObjectProperty;
+  rdfs:label "betrokken recht"@nl;
+  rdfs:comment "Verwijzing naar het soort recht dat op de zekerheidsstelling betrekking heeft."@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:Zekerheidsstelling;
+  rdfs:range skos:Concept;
 .
 
 ## Datatype Properties
