@@ -257,7 +257,7 @@ brk:Aantekening a owl:Class;
 .
 
 # Aantekeninggebied can have three different geometries (see property definitions)
-brk:Aantekeningsgebied a owl:Class;
+brk:Aantekeninggebied a owl:Class;
   rdfs:subClassOf
     brk:HistorischVoorkomen, # not sure about this, but this is put here in case this spatial object has provenance data.
     ogc:Feature;
