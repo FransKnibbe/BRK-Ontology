@@ -47,7 +47,7 @@
 
 ## Notes for classes:
 #
-# 1) Abstract UML class _KadastraalObject does not need to be modelled, because it only introduces an 
+# 1) Abstract UML class _KadastraalObject does not need to be modelled, because it only introduces an
 # identification string, which can be published as an rdfs:label. Relationships to KadastraalObject can
 # be directed to its only subclass, OnroerendeZaak.
 #
@@ -55,7 +55,7 @@
 # It does not seem to describe the source data themselves, so ObjectCompleetProduct is not modelled here.
 #
 # 3)  _Voorkomen is intended to record provenance data (history/audit trail), so an attempt is made to
-# map to PROV-O. All subclasses of _Voorkomen will be instances of prov:Entity. brk:HistorischVoorkomen is 
+# map to PROV-O. All subclasses of _Voorkomen will be instances of prov:Entity. brk:HistorischVoorkomen is
 # defined to make that clear.
 #
 
@@ -66,7 +66,7 @@ brk:HistorischVoorkomen a owl:Class; # This name retains the original name _Voor
   rdfs:isDefinedBy :brk;
 .
 
-brk:OnroerendeZaak a owl:Class; 
+brk:OnroerendeZaak a owl:Class;
   rdfs:subClassOf brk:HistorischVoorkomen;
   rdfs:label "Onroerende zaak"@nl;
   rdf:comment "Een onroerende zaak is de grond, de niet gewonnen delfstoffen, de met de grond verenigde beplantingen, alsmede de gebouwen en werken die duurzaam met de grond zijn verenigd, hetzij rechtstreeks, hetzij door vereniging met andere gebouwen of werken."@nl;
@@ -83,7 +83,7 @@ brk:Perceel a owl:Class;
   dct:subject brk_beg:Perceel;
 .
 
-brk:Appartementsrecht a owl:Class; 
+brk:Appartementsrecht a owl:Class;
   rdfs:subClassOf brk:OnroerendeZaak; # This does not seem right: OnroerendeZaak seems to a be tangible thing, Appartementsrecht is not.
   rdfs:label "Appartementsrecht"@nl;
   rdfs:comment "Een appartementsrecht is een onroerende zaak. Een appartementsrecht is een aandeel in de goederen die in de splitsing zijn betrokken, dat de bevoegdheid omvat tot het uitsluitend gebruik van bepaalde gedeelten van het gebouw die blijkens hun inrichting bestemd zijn of worden om als afzonderlijk geheel te worden gebruikt. Het aandeel kan mede omvatten de bevoegdheid tot het uitsluitend gebruik van bepaalde gedeelten van de bij het gebouw behorende grond. In het geval van lid 2 omvat het aandeel de bevoegdheid tot het uitsluitend gebruik van bepaalde gedeelten van het stuk grond, die blijkens hun inrichting of aanduiding bestemd zijn of worden om als afzonderlijk geheel te worden gebruikt. (art. 5:106 lid 4 BW)."@nl;
@@ -247,7 +247,7 @@ brk:NietnatuurlijkPersoon a owl:Class;
   rdfs:subClassOf brk:Persoon;
 .
 
-# There is a logical clash between the definition of Aantekening and it being a spatial object (ogc:Feature). That is 
+# There is a logical clash between the definition of Aantekening and it being a spatial object (ogc:Feature). That is
 # why class brk:Aantekeningsgebied is defined in this ontology.
 brk:Aantekening a owl:Class;
   rdfs:subClassOf brk:HistorischVoorkomen;
@@ -258,7 +258,7 @@ brk:Aantekening a owl:Class;
 
 # Aantekeninggebied can have three different geometries (see property definitions)
 brk:Aantekeningsgebied a owl:Class;
-  rdfs:subClassOf 
+  rdfs:subClassOf
     brk:HistorischVoorkomen, # not sure about this, but this is put here in case this spatial object has provenance data.
     ogc:Feature;
   rdfs:label "Aantekeningsgebied"@nl;
@@ -284,7 +284,7 @@ brk:Tenaamstellingsfiliatie a owl:Class;
 brk:GezamenlijkAandeel a owl:Class;
   rdfs:subClassOf brk:HistorischVoorkomen;
   rdfs:label "Gezamenlijk aandeel"@nl;
-  rdfs:comment "Twee of meer personen kunnen gezamenlijk een aandeel hebben in een zakelijk recht, waarbij het afzonderlijke aandeel in het gezamenlijk aandeel niet bekend is (als gezamenlijk aandeel bekend is dan is het individuele aandeel niet bekend en omgekeerd)."@nl; 
+  rdfs:comment "Twee of meer personen kunnen gezamenlijk een aandeel hebben in een zakelijk recht, waarbij het afzonderlijke aandeel in het gezamenlijk aandeel niet bekend is (als gezamenlijk aandeel bekend is dan is het individuele aandeel niet bekend en omgekeerd)."@nl;
   rdfs:isDefinedBy :brk;
 .
 
@@ -292,7 +292,7 @@ brk:GezamenlijkAandeel a owl:Class;
 brk:Zekerheidsstelling a owl:Class;
   rdfs:subClassOf brk:HistorischVoorkomen;
   rdfs:label "Zekerheidsstelling"@nl;
-  rdfs:comment ""@nl; 
+  rdfs:comment ""@nl;
   rdfs:isDefinedBy :brk;
 .
 
@@ -300,7 +300,7 @@ brk:Zekerheidsstelling a owl:Class;
 brk:ZekerheidsstellingInzakeBeslag a owl:Class;
   rdfs:subClassOf brk:Zekerheidsstelling;
   rdfs:label "Zekerheidsstelling inzake beslag"@nl;
-  rdfs:comment ""@nl; 
+  rdfs:comment ""@nl;
   rdfs:isDefinedBy :brk;
 .
 
@@ -308,7 +308,7 @@ brk:ZekerheidsstellingInzakeBeslag a owl:Class;
 brk:ZekerheidsstellingHypothecair a owl:Class;
   rdfs:subClassOf brk:Zekerheidsstelling;
   rdfs:label "Hypothecaire zekerheidsstelling"@nl;
-  rdfs:comment ""@nl; 
+  rdfs:comment ""@nl;
   rdfs:isDefinedBy :brk;
 .
 
@@ -316,7 +316,7 @@ brk:BinnenlandsAdres a owl:Class;
   rdfs:subClassOf locn:Address,
     brk:HistorischVoorkomen;
   rdfs:label "Binnenlands adres"@nl;
-  rdfs:comment "Een adres in Nederland."@nl; 
+  rdfs:comment "Een adres in Nederland."@nl;
   rdfs:isDefinedBy :brk;
 .
 
@@ -324,7 +324,7 @@ brk:BuitenlandsAdres a owl:Class;
   rdfs:subClassOf locn:Address,
     brk:HistorischVoorkomen;
   rdfs:label "Buitenlands adres"@nl;
-  rdfs:comment "Een adres buiten Nederland."@nl; 
+  rdfs:comment "Een adres buiten Nederland."@nl;
   rdfs:isDefinedBy :brk;
 .
 
@@ -332,7 +332,7 @@ brk:Woonadres a owl:Class;
   rdfs:subClassOf locn:Address,
     brk:HistorischVoorkomen;
   rdfs:label "Woonadres"@nl;
-  rdfs:comment "Een adres van een woonlocatie. Het adres kan binnenlands of buitenlands zijn."@nl; 
+  rdfs:comment "Een adres van een woonlocatie. Het adres kan binnenlands of buitenlands zijn."@nl;
   rdfs:isDefinedBy :brk;
 .
 
@@ -340,7 +340,7 @@ brk:Postadres a owl:Class;
   rdfs:subClassOf locn:Address,
     brk:HistorischVoorkomen;
   rdfs:label "Postadres"@nl;
-  rdfs:comment "Een adres dat geen woonlocatie aanduidt, maar waarop wel post ontvangen kan worden. Het adres kan binnenlands of buitenlands zijn."@nl; 
+  rdfs:comment "Een adres dat geen woonlocatie aanduidt, maar waarop wel post ontvangen kan worden. Het adres kan binnenlands of buitenlands zijn."@nl;
   rdfs:isDefinedBy :brk;
 .
 
@@ -410,7 +410,7 @@ brk:Hoofdzaak a owl:Class;
 # 1) It does not seem necessary to define the relationship between Stuk and Stukdeel in this ontology
 # because common terms can be used for that (e.g. dct:hasPart and dct:isPartOf). Mandatory relationships
 # can be specified in the SHACL shapes graph.
-# 
+#
 # 2) dct:creator can be used to model the isOpgemaaktDoor relationship between TerInschrijvingAangebodenStuk and Ondertekenaar.
 #
 
@@ -486,7 +486,7 @@ brk:perceeloppervlak a owl:ObjectProperty;
 brk:middelpunt a owl:ObjectProperty;
   rdfs:subPropertyOf ogc:hasGeometry,
     locn:geometry;
-  rdfs:label "centroïde"@nl, 
+  rdfs:label "centroïde"@nl,
     "middelpunt"@nl;
   rdfs:comment "Verwijzing naar het geografisch middelpunt (de centroïde) van een perceel."@nl;
   rdfs:isDefinedBy :brk;
@@ -834,7 +834,7 @@ brk:isBestemdTot a owl:ObjectProperty;
   rdfs:range brk:Mandeligheid;
 .
 
-brk:heeftVvE owl:ObjectProperty;
+brk:heeftVvE a owl:ObjectProperty;
   rdfs:label "heeft vereniging van eigenaren"@nl;
   rdfs:comment "Verwijzing naar de vereniging van eigenaren (VvE) behorend bij de appartementsrechtsplitsing."@nl;
   rdfs:isDefinedBy :brk;
@@ -842,7 +842,7 @@ brk:heeftVvE owl:ObjectProperty;
   rdfs:range brk:NietnatuurlijkPersoon;
 .
 
-brk:zekerheidsstellingRustOp owl:ObjectProperty;
+brk:zekerheidsstellingRustOp a owl:ObjectProperty;
   rdfs:label "zekerheidsstelling rust op"@nl;
   rdfs:comment "Verwijzing naar de onroerende zaak waarop de zekerheidsstelling rust."@nl;
   rdfs:isDefinedBy :brk;
@@ -850,7 +850,7 @@ brk:zekerheidsstellingRustOp owl:ObjectProperty;
   rdfs:range brk:OnroerendeZaak;
 .
 
-brk:zakelijkRechtRustOp owl:ObjectProperty;
+brk:zakelijkRechtRustOp a owl:ObjectProperty;
   rdfs:label "zakelijk recht rust op"@nl;
   rdfs:comment "Verwijzing naar de onroerende zaak waarop het zakelijk recht rust."@nl;
   rdfs:isDefinedBy :brk;
@@ -858,7 +858,7 @@ brk:zakelijkRechtRustOp owl:ObjectProperty;
   rdfs:range brk:OnroerendeZaak;
 .
 
-brk:heeftTekening owl:ObjectProperty;
+brk:heeftTekening a owl:ObjectProperty;
   rdfs:label "heeft tekening"@nl;
   rdfs:comment "Verwijzing naar een tekening die betrekking heeft op het zakelijk recht."@nl;
   rdfs:isDefinedBy :brk;
@@ -866,7 +866,7 @@ brk:heeftTekening owl:ObjectProperty;
   rdfs:range brk:Stukdeel;
 .
 
-brk:schuldeiser owl:ObjectProperty;
+brk:schuldeiser a owl:ObjectProperty;
   rdfs:label "schuldeiser"@nl;
   rdfs:comment "Verwijzing naar de schuldeiser van de zekerheidsstelling."@nl;
   rdfs:isDefinedBy :brk;
@@ -876,7 +876,7 @@ brk:schuldeiser owl:ObjectProperty;
 
 
 # A definition of what 'bezwaren' means in this contect should be added.
-brk:bezwaart owl:ObjectProperty;
+brk:bezwaart a owl:ObjectProperty;
   rdfs:label "bezwaart"@nl;
   rdfs:comment "Verwijzing naar een tenaamstelling die door de zekerheidsstelling wordt bezwaart."@nl;
   rdfs:isDefinedBy :brk;
@@ -885,7 +885,7 @@ brk:bezwaart owl:ObjectProperty;
 .
 
 # The defintion needs to be checked by someone knowledgeable.
-brk:isBeperktTot owl:ObjectProperty;
+brk:isBeperktTot a owl:ObjectProperty;
   rdfs:label "is beperkt tot"@nl;
   rdfs:comment "Verwijzing naar een tenaamstelling tot waar het zakelijk recht beperkt is."@nl;
   rdfs:isDefinedBy :brk;
