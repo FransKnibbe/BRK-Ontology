@@ -834,6 +834,66 @@ brk:isBestemdTot owl:ObjectProperty;
   rdfs:range brk:Mandeligheid;
 .
 
+brk:heeftVvE owl:ObjectProperty;
+  rdfs:label "heeft vereniging van eigenaren"@nl;
+  rdfs:comment "Verwijzing naar de vereniging van eigenaren (VvE) behorend bij de appartementsrechtsplitsing."@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:Appartementsrechtsplitsing;
+  rdfs:range brk:NietnatuurlijkPersoon;
+.
+
+brk:zekerheidsstellingRustOp owl:ObjectProperty;
+  rdfs:label "zekerheidsstelling rust op"@nl;
+  rdfs:comment "Verwijzing naar de onroerende zaak waarop de zekerheidsstelling rust."@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:Zekerheidsstelling;
+  rdfs:range brk:OnroerendeZaak;
+.
+
+brk:zakelijkRechtRustOp owl:ObjectProperty;
+  rdfs:label "zakelijk recht rust op"@nl;
+  rdfs:comment "Verwijzing naar de onroerende zaak waarop het zakelijk recht rust."@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:ZakelijkRecht;
+  rdfs:range brk:OnroerendeZaak;
+.
+
+brk:heeftTekening owl:ObjectProperty;
+  rdfs:label "heeft tekening"@nl;
+  rdfs:comment "Verwijzing naar een tekening die betrekking heeft op het zakelijk recht."@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:ZakelijkRecht;
+  rdfs:range brk:Stukdeel;
+.
+
+brk:schuldeiser owl:ObjectProperty;
+  rdfs:label "schuldeiser"@nl;
+  rdfs:comment "Verwijzing naar de schuldeiser van de zekerheidsstelling."@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:Zekerheidsstelling;
+  rdfs:range brk:Persoon;
+.
+
+
+# A definition of what 'bezwaren' means in this contect should be added.
+brk:bezwaart owl:ObjectProperty;
+  rdfs:label "bezwaart"@nl;
+  rdfs:comment "Verwijzing naar een tenaamstelling die door de zekerheidsstelling wordt bezwaart."@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:Zekerheidsstelling;
+  rdfs:range brk:Tenaamstelling;
+.
+
+# The defintion needs to be checked by someone knowledgeable.
+brk:isBeperktTot owl:ObjectProperty;
+  rdfs:label "is beperkt tot"@nl;
+  rdfs:comment "Verwijzing naar een tenaamstelling tot waar het zakelijk recht beperkt is."@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:ZakelijkRecht;
+  rdfs:range brk:Tenaamstelling;
+.
+
+
 ## Datatype Properties
 
 brk:sectie a owl:DatatypeProperty;
