@@ -347,7 +347,7 @@ brk:Postadres a owl:Class;
 brk:Erfpachtcanon a owl:Class;
   rdfs:subClassOf brk:HistorischVoorkomen;
   rdfs:label "Erfpachtcanon"@nl;
-  rdfs:comment "De vergoeding die een erfpachter betaald voor het in gebruik hebben van een onroerende zaak."
+  rdfs:comment "De vergoeding die een erfpachter betaald voor het in gebruik hebben van een onroerende zaak."@nl;
   rdfs:isDefinedBy :brk;
 .
 
@@ -810,7 +810,7 @@ brk:erfpachtcanonVermeldIn a owl:ObjectProperty;
   rdfs:range brk:Stukdeel;
 .
 
-brk:aardZakelijkRecht owl:ObjectProperty;
+brk:aardZakelijkRecht a owl:ObjectProperty;
   rdfs:label "aard zakelijk recht"@nl;
   rdfs:comment "Verwijzing naar de aard van het zakelijk recht."@nl;
   rdfs:isDefinedBy :brk;
@@ -818,7 +818,7 @@ brk:aardZakelijkRecht owl:ObjectProperty;
   rdfs:range skos:Concept;
 .
 
-brk:isBelastMet owl:ObjectProperty;
+brk:isBelastMet a owl:ObjectProperty;
   rdfs:label "is belast met"@nl;
   rdfs:comment "Verwijzing naar een zakelijk recht waarmee dit zakelijk recht is belast."@nl;
   rdfs:isDefinedBy :brk;
@@ -826,7 +826,7 @@ brk:isBelastMet owl:ObjectProperty;
   rdfs:range brk:ZakelijkRecht;
 .
 
-brk:isBestemdTot owl:ObjectProperty;
+brk:isBestemdTot a owl:ObjectProperty;
   rdfs:label "is bestemd tot"@nl;
   rdfs:comment "Verwijzing naar een mandeligheid waartoe dit zakelijk recht is bestemd."@nl;
   rdfs:isDefinedBy :brk;
