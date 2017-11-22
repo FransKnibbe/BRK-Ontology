@@ -133,7 +133,7 @@ brk:Onroerendezaakfiliatie a owl:Class;
   rdfs:isDefinedBy :brk;
 .
 
-brk:KadastraleGrootte a owl:class;
+brk:KadastraleGrootte a owl:Class;
   rdfs:label "Kadastrale grootte"@nl,
     "Oppervlakte"@nl;
   rdfs:comment "De oppervlakte van het perceel in centiare (vierkante meter), en de soort vaststelling van die oppervlakte."@nl;
@@ -141,7 +141,7 @@ brk:KadastraleGrootte a owl:class;
 .
 
 # Soort grootte should be defined as SKOS concepts in brk_beg
-# brk:SoortGrootte a owl:class;
+# brk:SoortGrootte a owl:Class;
   # rdfs:label "Soort grootte",
     # rdfs:label "Soort oppervlakte";
   # rdfs:comment "De soort vaststelling van de oppervlakte van een perceel."@nl;
