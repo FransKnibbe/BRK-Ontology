@@ -649,7 +649,7 @@ brk:bijOnroerendeZaak a owl:ObjectProperty; # in CDMKAD: aantekeningKadastraalOb
   rdfs:range brk:OnroerendeZaak;
 .
 
-brk:aantekeningIsGebaseeerdOp a owl:ObjectProperty;
+brk:aantekeningIsGebaseerdOp a owl:ObjectProperty;
   rdfs:subPropertyOf schema:isBasedOn;
   rdfs:label "aantekening is gebaseerd op"@nl;
   rdfs:comment "Verwijzing naar het stukdeel waarop de aantekening is gebaseerd."@nl;
@@ -792,7 +792,7 @@ brk:soortErfpachtcanon a owl:ObjectProperty;
   rdfs:range skos:Concept;
 .
 
-brk:erfpachtcanonIsGebaseeerdOp a owl:ObjectProperty;
+brk:erfpachtcanonIsGebaseerdOp a owl:ObjectProperty;
   rdfs:subPropertyOf schema:isBasedOn;
   rdfs:label "erfpachtcanon is gebaseerd op"@nl;
   rdfs:comment "Verwijzing naar het stukdeel waarop de erfpachtcanon is gebaseerd."@nl;
@@ -875,7 +875,7 @@ brk:schuldeiser a owl:ObjectProperty;
 .
 
 
-# A definition of what 'bezwaren' means in this contect should be added.
+# A definition of what 'bezwaren' means in this context should be added.
 brk:bezwaart a owl:ObjectProperty;
   rdfs:label "bezwaart"@nl;
   rdfs:comment "Verwijzing naar een tenaamstelling die door de zekerheidsstelling wordt bezwaart."@nl;
