@@ -690,6 +690,14 @@ brk:aantekeningRecht a owl:ObjectProperty;
   rdfs:range brk:Tenaamstelling;
 .
 
+brk:isTenaamstellingVan a owl:ObjectProperty;
+  rdfs:label "is tenaamstelling van"@nl;
+  rdfs:comment "Verwijzing naar het recht waarop de tenaamstelling betrekking heeft."@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:Tenaamstelling;
+  rdfs:range brk:ZakelijkRechtRecht;
+.
+
 brk:betrokkenPartner a owl:ObjectProperty;
   rdfs:label "betrokken partner"@nl;
   rdfs:comment "Verwijzing naar de partner van de persoon die bij de tenaamstelling is geregistreerd."@nl;
@@ -873,7 +881,6 @@ brk:schuldeiser a owl:ObjectProperty;
   rdfs:domain brk:Zekerheidsstelling;
   rdfs:range brk:Persoon;
 .
-
 
 # A definition of what 'bezwaren' means in this context should be added.
 brk:bezwaart a owl:ObjectProperty;
