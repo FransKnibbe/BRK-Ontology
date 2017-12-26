@@ -21,6 +21,80 @@
 @prefix brk: <http://brk.basisregistraties.overheid.nl/def/brk#>.
 @prefix : <http://brk.basisregistraties.overheid.nl/def/>.
 
+brk_str:OnroerendeZaak a sh:NodeShape;
+  sh:targetClass brk:OnroerendeZaak;
+  sh:property 
+    brk_str:OnroerendeZaak_kadastraleAanduiding,
+    brk_str:OnroerendeZaak_belastMet,
+    brk_str:OnroerendeZaak_aardCultuurOnbebouwd,
+    brk_str:OnroerendeZaak_aardCultuurBebouwd,
+    brk_str:OnroerendeZaak_omschrijvingOnderzoekErfdienstbaarheden,
+    brk_str:OnroerendeZaak_toestandsdatumOnderzoekErfdienstbaarheden,
+    brk_str:OnroerendeZaak_koopsom,
+    brk_str:OnroerendeZaak_toelichtingBewaarder,
+    brk_str:OnroerendeZaak_omschrijvingKadastraalObject;
+.
+
+brk_str:OnroerendeZaak_kadastraleAanduiding a sh:PropertyShape;
+  sh:path brk:kadastraleAanduiding;
+  sh:nodeKind sh:IRI;
+  sh:maxCount 1;
+  sh:minCount 1;
+  sh:class brk:KadastraleAanduiding;
+  sh:node brk_str:KadastraleAanduiding;
+.
+
+brk_str:KadastraleAanduiding a sh:NodeShape;
+  sh:targetClass brk:KadastraleAanduiding;
+  sh:property
+    brk_str:KadastraleAanduiding_kadastraleGemeente,
+    brk_str:KadastraleAanduiding_sectie,
+    brk_str:KadastraleAanduiding_perceelnummer;
+    brk_str:KadastraleAanduiding_appartmentsrechtvolgnummer;
+.
+
+brk_str:KadastraleAanduiding_kadastraleGemeente a sh:PropertyShape;
+  sh:path brk:kadastraleGemeente;
+  sh:nodeKind sh:IRI;
+  sh:maxCount 1;
+  sh:minCount 1;
+  sh:class brk:KadastraleGemeente;
+  sh:node brk_str:KadastraleGemeente;
+.
+
+brk_str:KadastraleGemeente a sh:NodeShape;
+  sh:targetClass brk:KadastraleGemeente;
+  sh:property
+    brk_str:KadastraleGemeente_gemeentecode,
+    brk_str:KadastraleGemeente_label;
+.
+
+brk_str:KadastraleGemeente_gemeentecode a sh:PropertyShape;
+  sh:path brk:gemeentecode;
+.
+
+brk_str:KadastraleGemeente_label a sh:PropertyShape;
+  sh:path rdfs:label;
+.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## the following shapes where defined for the kadastrale kaart:
+
 brk_str:Perceel a sh:NodeShape;
     sh:property brk_str:Perceel_kadastraleGemeente;
     sh:property brk_str:Perceel_sectie;

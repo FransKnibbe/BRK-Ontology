@@ -24,41 +24,43 @@
 @prefix brk: <http://brk.basisregistraties.overheid.nl/def/brk#>.
 @prefix : <http://brk.basisregistraties.overheid.nl/def/>.
 
-## example without PROV-O
-ex:perceel_1 a brk:Perceel;
-  rdfs:label "perceel 1";
-  brk:overgegaanIn ex:filiatieA;
-.
+##example without PROV-O
+#ex:perceel_1 a brk:Perceel;
+#  rdfs:label "perceel 1";
+#  brk:overgegaanIn ex:filiatieA;
+#.
 
-ex:perceel_2 a brk:Perceel;
-  rdfs:label "perceel 2";
-  brk:ontstaanUit ex:filiatieA;
-.
+#ex:perceel_2 a brk:Perceel;
+#  rdfs:label "perceel 2";
+#  brk:ontstaanUit ex:filiatieA;
+#.
 
-ex:filiatie_A a brk:Onroerendezaakfiliatie;
-  brk:aard "Ruilverkaveling";
-  brk:overgangsgrootte "100":
-.
+#ex:filiatie_A a brk:Onroerendezaakfiliatie;
+#  brk:aard "Ruilverkaveling";
+#  brk:overgangsgrootte "100":
+#.
 
 ## example with PROV-O
 # advantages:
 # 1) uses common vocabulary
 # 2)links in both directions
 
-ex:perceel_101 a brk:Perceel;
+ex:perceel_101 a brk:OnroerendeZaak,
+    brk:Perceel;
   rdfs:label "perceel 101";
-  brk:wasInvalidatedBy ex:perceelfiliatie_B;
   brk:kadastraleAanduiding ex:aanduiding_101;
+  brk:wasInvalidatedBy ex:perceelfiliatie_B;
 .
 
 ex:aanduiding_101 a brk:KadastraleAanduiding;
-  brk:perceelnummer "123";
   brk:kadastraleGemeente ex:gemeente_1;
+  brk:sectie "4"^^xsd:integer;
+  brk:perceelnummer "123"^^xsd:integer;
 .
 
 ex:gemeente_1 a brk:KadastraleGemeente;
-  brk:gemeentecode "10";
-  rdfs:label "Abbenbroek";
+  brk:gemeentecode "10"^^xsd:integer;
+  rdfs:label "Abbenbroek"^^xsd:string;
 ;
 
 ex:perceel_101 a brk:Perceel;
