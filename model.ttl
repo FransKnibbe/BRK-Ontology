@@ -441,6 +441,22 @@ brk:landinrichtingsrente a owl:ObjectProperty; #in CDMKAD: belastMet. Renamed be
   rdfs:range brk:Landinrichtingsrente;
 .
 
+brk:aardCultuurOnbebouwd a owl:ObjectProperty;
+  rdfs:label "aard cultuur onbebouwd"@nl;
+  rdfs:comment "Het soort gebruik van een onbebouwde onroerende zaak."@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:OnroerendeZaak;
+  rdfs:range skos:Concept;
+.
+
+brk:aardCultuurBebouwd a owl:ObjectProperty;
+  rdfs:label "aard cultuur bebouwd"@nl;
+  rdfs:comment "Het soort gebruik van een bebouwde onroerende zaak."@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:OnroerendeZaak;
+  rdfs:range skos:Concept;
+.
+
 brk:koopsom a owl:ObjectProperty;
   rdfs:label "koopsom"@nl;
   rdfs:comment "Een verwijzing naar de van toepassing zijnde koopsom."@nl;

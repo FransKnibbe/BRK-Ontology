@@ -21,3 +21,6 @@ CDMKAD is taken to be authoritative. That seems strange, because CDMKAD seems to
 12. Note the distinction between 'het eigendom' (een bezitting) and 'de eigendom' (een recht).
 13. How model historical information (change history and audit trail) needs to be aligned with solutions applied in other base registries in the data platform (BAG BRT, IMRO, ...).
 14. Addresses can be related to BAG resources, NatuurlijkPersoon can be related to the BRP. Those relationships are not in the model, because they do not seem to require special semantics in the BRK domain.
+15. There is an inconsistency withing the CDMKAD model: OnroerendeZaak.aardCultuurBebouwd and OnroerendeZaak.aardCultuurOnbebouwd have a cardinality of 0..1 in the diagram, but in the description it says multiple values are allowed.
+16. Are aardCultuurBebouwd and aardCultuurOnbebouwd correctly defined as properties of OnroerendeZaak? It seems better to make them properties of Perceel. Whether or not an OnroerendeZaak is built up seems to make no sense for Appartementsrecht or Leidingnetwerk.
+17. Similar to the point above: Can Appartementsrecht or Leidingnetwerk have an 'erf'? If not, properties omschrijvingOnderzoekErfdienstbaarheden and toestandsdatumOnderzoekErfdienstbaarheden have a wrong domain.

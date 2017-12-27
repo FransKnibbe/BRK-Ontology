@@ -137,9 +137,19 @@ brk_str:Landinrichtingsrente_eindjaar a sh:PropertyShape;
   sh:datatype xsd:gYear;
 .
 
+brk_str:OnroerendeZaak_aardCultuurOnbebouwd a sh:PropertyShape;
+  sh:path brk:aardCultuurOnbebouwd;
+  sh:maxCount 1; # This corresponds to the UML diagram but contradicts the description in CDMKAD
+  sh:nodeKind sh:IRI;
+  sh:class skos:Concept;
+.
 
-
-
+brk_str:OnroerendeZaak_aardCultuurBebouwd a sh:PropertyShape;
+  sh:path brk:aardCultuurBebouwd;
+  sh:maxCount 1; # This corresponds to the UML diagram but contradicts the description in CDMKAD
+  sh:nodeKind sh:IRI;
+  sh:class skos:Concept;
+.
 
 
 

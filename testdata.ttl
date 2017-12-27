@@ -24,13 +24,23 @@
 @prefix brk: <http://brk.basisregistraties.overheid.nl/def/brk#>.
 @prefix : <http://brk.basisregistraties.overheid.nl/def/>.
 
+
+# Sample SKOS concepts (pending the full concept scheme for the BRK)
+
+brk_beg:CultuurBebouwd_Parkeren a skos:Concept;
+.
+brk_beg:CultuurOnbebouwd_Parkeren a skos:Concept;
+.
+brk_beg:CultuurOnbouwd_Onderwijs a skos:Concept;
+.
+
 ##example without PROV-O
 #ex:perceel_1 a brk:Perceel;
 #  rdfs:label "perceel 1";
 #  brk:overgegaanIn ex:filiatieA;
 #.
 
-#ex:perceel_2 a brk:Perceel;
+ex:perceel_2 a brk:Perceel;
 #  rdfs:label "perceel 2";
 #  brk:ontstaanUit ex:filiatieA;
 #.
@@ -51,6 +61,8 @@ ex:perceel_101 a brk:OnroerendeZaak,
   brk:kadastraleAanduiding ex:aanduiding_101;
   brk:belastMet ex:landinrichtingsrente_101_1;
   brk:belastMet ex:landinrichtingsrente_101_2;
+  brk:aardCultuurOnbebouwd brk_beg:CultuurOnbebouwd_Parkeren;
+  brk:aardCultuurBebouwd brk_beg:CultuurBebouwd_Parkeren;
   #brk:wasInvalidatedBy ex:perceelfiliatie_B;
 .
 
@@ -108,8 +120,3 @@ ex:landinrichtingsrente_101_2 a brk:Landinrichtingsrente;
   # prov:generated ex:tenaamstelling_3;
   # brk:redenTenaamstellingsfiliatie brk_beg:Samengevoegd;
 # .
-
-
-
-
-
