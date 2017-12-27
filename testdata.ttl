@@ -47,9 +47,11 @@
 
 ex:perceel_101 a brk:OnroerendeZaak,
     brk:Perceel;
-  rdfs:label "perceel 101";
+  rdfs:label "NL.IMKAD.KadastraalObject.22120319570000";
   brk:kadastraleAanduiding ex:aanduiding_101;
-  brk:wasInvalidatedBy ex:perceelfiliatie_B;
+  brk:belastMet ex:landinrichtingsrente_101_1;
+  brk:belastMet ex:landinrichtingsrente_101_2;
+  #brk:wasInvalidatedBy ex:perceelfiliatie_B;
 .
 
 ex:aanduiding_101 a brk:KadastraleAanduiding;
@@ -59,40 +61,53 @@ ex:aanduiding_101 a brk:KadastraleAanduiding;
 .
 
 ex:gemeente_1 a brk:KadastraleGemeente;
-  brk:gemeentecode "10"^^xsd:integer;
+  dct:identifier "10"^^xsd:integer;
   rdfs:label "Abbenbroek"^^xsd:string;
-;
-
-ex:perceel_101 a brk:Perceel;
-  rdfs:label "perceel 102";
-  brk:wasGeneratedBy ex:perceelfiliatie_B;
 .
 
-ex:perceelfiliatie_B a prov:Activity;
-  prov:used ex:perceel_101;
-  prov:generated perceel_102;
-  brk:aardOnroerendezaakfiliatie ro_beg:Ruilverkaveling;
-  brk:overgangsgrootte "100":
-;
-
-ex:tenaamstelling_1 a brk:Tenaamstelling;
-  brk:wasInvalidatedBy ex:tenaamstellingsfiliatie_1;
+ex:landinrichtingsrente_101_1 a brk:Landinrichtingsrente;
+  brk:bedrag "10000.50"^^xsd:decimal;
+  brk:eindjaar "2020"^^xsd:gYear;
 .
 
-ex:tenaamstelling_2 a brk:Tenaamstelling;
-  brk:wasInvalidatedBy ex:tenaamstellingsfiliatie_1;
+ex:landinrichtingsrente_101_2 a brk:Landinrichtingsrente;
+  brk:bedrag "2000"^^xsd:decimal;
+  brk:eindjaar "2030"^^xsd:gYear;
 .
 
-ex:tenaamstelling_3 a brk:Tenaamstelling;
-  brk:wasGeneratedBy ex:tenaamstellingsfiliatie_1;
-.
 
-ex:tenaamstellingsfiliatie_1 a brk:Tenaamstellingsfiliatie;
-  prov:used tenaamstelling_1,
-    tenaamstelling_2;
-  prov:generated tenaamstelling_3;
-  brk:redenTenaamstellingsfiliatie brk_beg:Samengevoegd;
-;
+
+
+# ex:perceel_102 a brk:Perceel;
+  # rdfs:label "perceel 102";
+  # brk:wasGeneratedBy ex:perceelfiliatie_B;
+# .
+
+# ex:perceelfiliatie_B a prov:Activity;
+  # prov:used ex:perceel_101;
+  # prov:generated ex:perceel_102;
+  # brk:aardOnroerendezaakfiliatie brk_beg:Ruilverkaveling;
+  # brk:overgangsgrootte "100";
+# .
+
+# ex:tenaamstelling_1 a brk:Tenaamstelling;
+  # brk:wasInvalidatedBy ex:tenaamstellingsfiliatie_1;
+# .
+
+# ex:tenaamstelling_2 a brk:Tenaamstelling;
+  # brk:wasInvalidatedBy ex:tenaamstellingsfiliatie_1;
+# .
+
+# ex:tenaamstelling_3 a brk:Tenaamstelling;
+  # brk:wasGeneratedBy ex:tenaamstellingsfiliatie_1;
+# .
+
+# ex:tenaamstellingsfiliatie_1 a brk:Tenaamstellingsfiliatie;
+  # prov:used ex:tenaamstelling_1,
+    # ex:tenaamstelling_2;
+  # prov:generated ex:tenaamstelling_3;
+  # brk:redenTenaamstellingsfiliatie brk_beg:Samengevoegd;
+# .
 
 
 
