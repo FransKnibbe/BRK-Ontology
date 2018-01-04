@@ -63,6 +63,7 @@ ex:perceel_101 a brk:OnroerendeZaak,
   brk:belastMet ex:landinrichtingsrente_101_2;
   brk:aardCultuurOnbebouwd brk_beg:CultuurOnbebouwd_Parkeren;
   brk:aardCultuurBebouwd brk_beg:CultuurBebouwd_Parkeren;
+  brk:koopsom ex:koopsom_101;
   #brk:wasInvalidatedBy ex:perceelfiliatie_B;
 .
 
@@ -87,7 +88,11 @@ ex:landinrichtingsrente_101_2 a brk:Landinrichtingsrente;
   brk:eindjaar "2030"^^xsd:gYear;
 .
 
-
+ex:koopsom_101 a brk:Koopsom;
+  brk:bedrag "100000"^^xsd:decimal;
+  brk:koopjaar "2009"^^xsd:gYear;
+  brk:indicatieMeerObjecten "false"^^xsd:boolean;
+.
 
 
 # ex:perceel_102 a brk:Perceel;

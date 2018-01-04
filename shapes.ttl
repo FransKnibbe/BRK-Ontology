@@ -151,11 +151,31 @@ brk_str:OnroerendeZaak_aardCultuurBebouwd a sh:PropertyShape;
   sh:class skos:Concept;
 .
 
+brk_str:OnroerendeZaak_koopsom a sh:PropertyShape;
+  sh:path brk:koopsom;
+  sh:maxCount 1;
+  sh:nodeKind sh:IRI;
+  sh:class brk:Koopsom;
+  sh:node brk_str:Koopsom;
+.
 
+brk_str:OnroerendeZaak_omschrijvingOnderzoekErfdienstbaarheden  a sh:PropertyShape;
+  sh:path brk:omschrijvingOnderzoekErfdienstbaarheden;
+  sh:maxCount 1;
+  sh:nodeKind sh:IRI;
+  sh:class brk:Koopsom;
+  sh:node brk_str:Koopsom;
+.
 
+brk_str:Koopsom a sh:NodeShape;
+  sh:targetClass brk:Koopsom;
+  sh:property
+    brk_str:Koopsom_bedrag,
+    brk_atr:Koopsom_koopjaar,
+    brk_str:Koopsom_indicatieMeerObjecten;
+.
 
-
-
+brk_str
 
 
 

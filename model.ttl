@@ -907,7 +907,7 @@ brk:bezwaart a owl:ObjectProperty;
   rdfs:range brk:Tenaamstelling;
 .
 
-# The defintion needs to be checked by someone knowledgeable.
+# The definition needs to be checked by someone knowledgeable.
 brk:isBeperktTot a owl:ObjectProperty;
   rdfs:label "is beperkt tot"@nl;
   rdfs:comment "Verwijzing naar een tenaamstelling tot waar het zakelijk recht beperkt is."@nl;
@@ -924,12 +924,15 @@ brk:sectie a owl:DatatypeProperty;
   rdfs:comment "Een sectie is een onderdeel van een kadastrale gemeente en vormt het tweede deel van de aanduiding van een kadastraal object. De sectie was van oorsprong een logische eenheid binnen de gemeente, bijvoorbeeld een dorp of streek. Secties worden aangeduid met een (hoofd)letter, in sommige gevallen twee."@nl;
   rdfs:isDefinedBy :brk;
   dct:subject brk_beg:Sectie;
+  rdfs:domain brk:KadastraleAanduiding;
   rdfs:range xsd:string;
 .
 
 brk:perceelnummer a owl:DatatypeProperty;
   rdfs:label "perceelnummer"@nl;
   rdfs:isDefinedBy :brk;
+  rdfs:comment "Perceelcode bestaande uit vijf cijfers."@nl;
+  rdfs:domain brk:KadastraleAanduiding;
   rdfs:range xsd:integer;
 .
 
@@ -943,6 +946,33 @@ brk:perceelnummerverschuiving a owl:DatatypeProperty;
 
 brk:perceelnummerrotatie a owl:DatatypeProperty;
   rdfs:label "perceelnummerrotatie"@nl;
+  rdfs:comment "Verwijzing naar de rotatie van een perceelnummer."@nl;
   rdfs:isDefinedBy :brk;
+  rdfs:domain brk:Perceel;
   dct:subject brk_beg:Perceelnummerrotatie
 .
+
+brk:eindjaar a owl:DatatypeProperty;
+  rdfs:label "eindjaar"@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:comment "Het jaar waarin de landinrichtingsrente afloopt."@nl;
+  rdfs:range xsd:gYear;
+.
+
+# Can a common vocabulary be found for monetary values?
+brk:bedrag a owl:DatatypeProperty;
+  rdfs:label "bedrag"@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:comment "Bedrag in euro."@nl;
+  rdfs:range xsd:decimal;
+.
+
+brk:omschrijvingOnderzoekErfdienstbaarheden a owl:DatatypeProperty;
+  rdfs:label "omschrijving onderzoek erfdienstbaarheden"@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:comment ""@nl;
+  rdfs:range xsd:decimal;
+.
+
+omschrijvingOnderzoekErfdienstbaarheden 
+
