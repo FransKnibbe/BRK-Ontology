@@ -9,6 +9,7 @@
 @prefix locn: <http://www.w3.org/ns/locn#> .
 @prefix ogc: <http://www.opengis.net/ont/geosparql#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix person: <https://www.w3.org/ns/person#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -25,6 +26,3 @@
 @prefix brk_beg: <http://brk.basisregistraties.overheid.nl/id/begrip/>.
 @prefix brk: <http://brk.basisregistraties.overheid.nl/def/brk#>.
 @prefix : <http://brk.basisregistraties.overheid.nl/def/>.
-
-
-

@@ -29,8 +29,9 @@ brk_str:OnroerendeZaak a sh:NodeShape;
     brk_str:OnroerendeZaak_belastMet,
     brk_str:OnroerendeZaak_aardCultuurOnbebouwd,
     brk_str:OnroerendeZaak_aardCultuurBebouwd,
-    brk_str:OnroerendeZaak_omschrijvingOnderzoekErfdienstbaarheden,
-    brk_str:OnroerendeZaak_toestandsdatumOnderzoekErfdienstbaarheden,
+    #brk_str:OnroerendeZaak_omschrijvingOnderzoekErfdienstbaarheden,
+    #brk_str:OnroerendeZaak_toestandsdatumOnderzoekErfdienstbaarheden,
+    brk_str:OnroerendeZaak_erfdienstbaarhedenonderzoek,
     brk_str:OnroerendeZaak_koopsom,
     brk_str:OnroerendeZaak_toelichtingBewaarder,
     brk_str:OnroerendeZaak_omschrijvingKadastraalObject;
@@ -151,16 +152,37 @@ brk_str:OnroerendeZaak_aardCultuurBebouwd a sh:PropertyShape;
   sh:class skos:Concept;
 .
 
-brk_str:OnroerendeZaak_koopsom a sh:PropertyShape;
-  sh:path brk:koopsom;
+brk_str:OnroerendeZaak_erfdienstbaarhedenonderzoek a sh:PropertyShape;
+  sh:path brk:erfdienstbaarhedenonderzoek
   sh:maxCount 1;
   sh:nodeKind sh:IRI;
-  sh:class brk:Koopsom;
-  sh:node brk_str:Koopsom;
+  sh:class brk:Erfdienstbaarhedenonderzoek;
+  sh:node brk_str:Erfdienstbaarhedenonderzoek;
 .
 
-brk_str:OnroerendeZaak_omschrijvingOnderzoekErfdienstbaarheden  a sh:PropertyShape;
+brk_str:Erfdienstbaarhedenonderzoek a sh:NodeShape;
+  sh:targetClass brk:Erfdienstbaarhedenonderzoek;
+  sh:property
+    brk_str:omschrijvingOnderzoekErfdienstbaarheden,
+    brk_str:toestandsdatumOnderzoekErfdienstbaarheden;
+.
+
+brk_str:omschrijvingOnderzoekErfdienstbaarheden a sh:PropertyShape;
   sh:path brk:omschrijvingOnderzoekErfdienstbaarheden;
+  sh:maxCount 1;
+  sh:nodeKind sh:Literal;
+  sh:datatype xsd:string;
+.
+
+brk_str:toestandsdatumOnderzoekErfdienstbaarheden a sh:PropertyShape;
+  sh:path brk:toestandsdatumOnderzoekErfdienstbaarheden;
+  sh:maxCount 1;
+  sh:nodeKind sh:Literal;
+  sh:datatype xsd:date;
+.
+
+brk_str:OnroerendeZaak_koopsom a sh:PropertyShape;
+  sh:path brk:koopsom;
   sh:maxCount 1;
   sh:nodeKind sh:IRI;
   sh:class brk:Koopsom;
@@ -175,7 +197,29 @@ brk_str:Koopsom a sh:NodeShape;
     brk_str:Koopsom_indicatieMeerObjecten;
 .
 
-brk_str
+brk_str:Koopsom_bedrag a sh:PropertyShape;
+  sh:path:bedrag;
+  sh:minCount 1;
+  sh:maxCount 1;
+  sh:nodeKind sh:Literal;
+  sh:datatype xsd:decimal;
+.
+
+brk_str:Koopsom_koopjaara sh:PropertyShape;
+  sh:path:koopjaar;
+  sh:maxCount 1;
+  sh:nodeKind sh:Literal;
+  sh:datatype xsd:gYear;
+.
+
+brk_str:Koopsom_indicatieMeerObjecten a sh:PropertyShape;
+  sh:path:indicatieMeerObjecten;
+  sh:minCount 1;
+  sh:maxCount 1;
+  sh:nodeKind sh:Literal;
+  sh:datatype xsd:boolean;
+.
+
 
 
 

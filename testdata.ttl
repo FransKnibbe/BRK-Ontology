@@ -63,6 +63,7 @@ ex:perceel_101 a brk:OnroerendeZaak,
   brk:belastMet ex:landinrichtingsrente_101_2;
   brk:aardCultuurOnbebouwd brk_beg:CultuurOnbebouwd_Parkeren;
   brk:aardCultuurBebouwd brk_beg:CultuurBebouwd_Parkeren;
+  brk:erfdienstbaarhedenonderzoek ex:onderzoek_101;
   brk:koopsom ex:koopsom_101;
   #brk:wasInvalidatedBy ex:perceelfiliatie_B;
 .
@@ -86,6 +87,11 @@ ex:landinrichtingsrente_101_1 a brk:Landinrichtingsrente;
 ex:landinrichtingsrente_101_2 a brk:Landinrichtingsrente;
   brk:bedrag "2000"^^xsd:decimal;
   brk:eindjaar "2030"^^xsd:gYear;
+.
+
+ex:onderzoek_101 a brk:Erfdienstbaarhedenonderzoek;
+  brk:omschrijvingOnderzoekErfdienstbaarheden "Onderzoek n.a.v. onteigening"^^xsd:string;
+  brk:toestandsdatumOnderzoekErfdienstbaarheden "2006-07-25"^^xsd:date;
 .
 
 ex:koopsom_101 a brk:Koopsom;

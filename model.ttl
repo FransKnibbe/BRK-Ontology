@@ -8,6 +8,7 @@
 @prefix locn: <http://www.w3.org/ns/locn#> .
 @prefix ogc: <http://www.opengis.net/ont/geosparql#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix person: <https://www.w3.org/ns/person#> .
 @prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -41,6 +42,7 @@
   owl:versionInfo "0.0.1"@nl;
   rdfs:seeAlso <https://brk.basisregistraties.overheid.nl/>;
   sh:shapesGraph :brk_str;
+  skos:editorialNote "Dit model is gebaseerd op CDMKAD, omdat CDMKAD door het Kadaster intern wordt gebruikt. Daardoor zal de transformatie van interne data makkelijker te definiëren zijn."@nl;
 .
 
 ##### Classes
@@ -120,7 +122,14 @@ brk:Landinrichtingsrente a owl:Class;
   rdfs:isDefinedBy :brk;
 .
 
+brk: Erfdienstbaarhedenonderzoek a owl:Class;
+  rdfs:label "Erfdienstbaarhedenonderzoek"@nl;
+  rdfs:commment "Een erfdienstbaarhedenonderzoek kan op verzoek door het Kadaster worden uitgevoerd. In de openbare registers wordt dan gezocht naar erfdienstbaarheden van een onroerende zaak. Een erfdienstbaarheid is een recht dat iemand of een organisatie heeft om een stuk grond van een ander te gebruiken. Het stuk grond waarvan de eigenaar iets mag, heet het heersende erf. Het stuk grond waarvan de eigenaar iets moet toestaan heet het dienende erf."@nl;
+  rdfs:isDefinedBy :brk;
+.
+
 brk:Koopsom a owl:Class;
+  # schema:MonetaryAmount
   rdfs:label "Koopsom"@nl;
   rdfs:comment "Een koopsom is het bedrag dat vermeld staat in het ter inschrijving aangeboden stuk, dat als tegenprestatie geldt met betrekking tot een transactie of overdracht van een zakelijk recht van een object (of samen met meerdere objecten) en dat de verkrijger aan de vervreemder verschuldigd is. Dit bedrag hebben verkrijger en vervreemder onderling met elkaar afgesproken en wordt door een notaris opgenomen in de akte."@nl;
   rdfs:isDefinedBy :brk;
@@ -213,7 +222,7 @@ brk:RedenVerzoek a owl:Class;
 .
 
 brk:Ondertekenaar a owl:Class;
-  rdfs:subClassOf foaf:Person;
+  rdfs:subClassOf person:Person;
   rdfs:label "Ondertekenaar"@nl;
   rdfs:comment "Een persoon die een aangeboden stuk heeft ondertekend."@nl;
   rdfs:isDefinedBy :brk;
@@ -232,13 +241,14 @@ brk:Persoon a owl:Class;
   rdfs:isDefinedBy :brk;
 .
 
-brk:NatuurlijkPersoon a owl:Class;
-  rdfs:subClassOf foaf:Person;
-  rdfs:label "Natuurlijk persoon"@nl;
-  rdfs:comment "Een mens, eventueel overleden."@nl;
-  rdfs:isDefinedBy :brk;
-  rdfs:subClassOf brk:Persoon;
-.
+# This definition is covered by person:Person
+# brk:NatuurlijkPersoon a owl:Class;
+  # rdfs:subClassOf foaf:Person;
+  # rdfs:label "Natuurlijk persoon"@nl;
+  # rdfs:comment "Een mens, eventueel overleden."@nl;
+  # rdfs:isDefinedBy :brk;
+  # rdfs:subClassOf brk:Persoon;
+# .
 
 brk:NietnatuurlijkPersoon a owl:Class;
   rdfs:label "Niet-natuurlijk persoon"@nl;
@@ -719,7 +729,7 @@ brk:betrokkenPartner a owl:ObjectProperty;
   rdfs:comment "Verwijzing naar de partner van de persoon die bij de tenaamstelling is geregistreerd."@nl;
   rdfs:isDefinedBy :brk;
   rdfs:domain brk:Tenaamstelling;
-  rdfs:range brk:NatuurlijkPersoon;
+  rdfs:range person:Person;
 .
 
 brk:betrokkenSamenwerkingsverband a owl:ObjectProperty;
@@ -916,6 +926,13 @@ brk:isBeperktTot a owl:ObjectProperty;
   rdfs:range brk:Tenaamstelling;
 .
 
+brk:erfdienstbaarhedenonderzoek a owl:DatatypeProperty;
+  rdfs:label "erfdienstbaarhedenonderzoek"@nl;
+  rdfs:comment "Verwijzing naar een erfdienstbaarhedenonderzoek."@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:OnroerendeZaak;
+  rdfs:range brk:Erfdienstbaarhedenonderzoek;
+.
 
 ## Datatype Properties
 
@@ -959,6 +976,23 @@ brk:eindjaar a owl:DatatypeProperty;
   rdfs:range xsd:gYear;
 .
 
+brk:omschrijvingOnderzoekErfdienstbaarheden a owl:DatatypeProperty;
+  rdfs:subPropertyOf dct:description;
+  rdfs:label "omschrijving erfdienstbaarhedenonderzoek"@nl;
+  rdfs:comment "Een uitleg van de aard van het erfdienstbaarhedenonderzoek."@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:Erfdienstbaarhedenonderzoek;
+  rdfs:range xsd:string;
+.
+
+brk:toestandsdatumOnderzoekErfdienstbaarheden a owl:DatatypeProperty;
+  rdfs:label "toestandsdatum onderzoek erfdienstbaarheden"@nl;
+  rdfs:comment "Datum tot wanneer het onderzoek naar erfdienstbaarheden is uitgevoerd."@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:Erfdienstbaarhedenonderzoek;
+  rdfs:range xsd:date;
+.
+
 # Can a common vocabulary be found for monetary values?
 brk:bedrag a owl:DatatypeProperty;
   rdfs:label "bedrag"@nl;
@@ -967,12 +1001,28 @@ brk:bedrag a owl:DatatypeProperty;
   rdfs:range xsd:decimal;
 .
 
-brk:omschrijvingOnderzoekErfdienstbaarheden a owl:DatatypeProperty;
-  rdfs:label "omschrijving onderzoek erfdienstbaarheden"@nl;
+brk:koopjaar a owl:DatatypeProperty;
+  rdfs:label "koopjaar"@nl;
   rdfs:isDefinedBy :brk;
-  rdfs:comment ""@nl;
-  rdfs:range xsd:decimal;
+  rdfs:comment "Het jaar waarin het belangrijkste recht van een onroerende zaak is verkregen."@nl;
+  rdfs:domain brk:Koopsom;
+  rdfs:range xsd:gYear;
 .
 
-omschrijvingOnderzoekErfdienstbaarheden 
+brk:indicatieMeerObjecten  a owl:DatatypeProperty;
+  rdfs:label "indicatie meer objecten "@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:comment "Geeft aan of de koopsom betrekking heeft op meer dan 1 onroerende zaak."@nl;
+  rdfs:domain brk:Koopsom;
+  rdfs:range xsd:boolean;
+.
+
+brk:toelichtingBewaarder a owl:DatatypeProperty;
+  rdfs:subPropertyOf dct:description;
+  rdfs:label "toelichting bewaarder"@nl;
+  rdfs:comment "Een toelichtende tekst die de bewaarder vermeld wil hebben bij een onroerende zaak."@nl;
+  rdfs:isDefinedBy :brk;
+  rdfs:domain brk:OnroerendeZaak;
+  rdfs:range xsd:string;
+.
 
