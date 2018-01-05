@@ -24,7 +24,7 @@
 brk_str:OnroerendeZaak a sh:NodeShape;
   sh:targetClass brk:OnroerendeZaak;
   sh:property
-    brk_str:OnroerendeZaak_label,
+    brk_str:OnroerendeZaak_identifier,
     brk_str:OnroerendeZaak_kadastraleAanduiding,
     brk_str:OnroerendeZaak_belastMet,
     brk_str:OnroerendeZaak_aardCultuurOnbebouwd,
@@ -38,8 +38,9 @@ brk_str:OnroerendeZaak a sh:NodeShape;
 .
 
 brk_str:OnroerendeZaak_label a sh:PropertyShape;
-  sh:path rdfs:label;
+  sh:path dct:identifier;
   sh:nodeKind sh:Literal;
+  sh:datatype xsd:string;
   sh:maxCount 1;
   sh:minCount 1;
 .
@@ -67,30 +68,7 @@ brk_str:KadastraleAanduiding_kadastraleGemeente a sh:PropertyShape;
   sh:nodeKind sh:IRI;
   sh:maxCount 1;
   sh:minCount 1;
-  sh:class brk:KadastraleGemeente;
-  sh:node brk_str:KadastraleGemeente;
-.
-
-# This will probably be replaced once a general LD-dataset with municipalities comes available
-brk_str:KadastraleGemeente a sh:NodeShape;
-  sh:targetClass brk:KadastraleGemeente;
-  sh:property
-    brk_str:KadastraleGemeente_identifier,
-    brk_str:KadastraleGemeente_label;
-.
-
-brk_str:KadastraleGemeente_gemeentecode a sh:PropertyShape;
-  sh:path dct:identifier;
-  sh:maxCount 1;
-  sh:minCount 1;
-  sh:datatype xsd:integer;
-.
-
-brk_str:KadastraleGemeente_label a sh:PropertyShape;
-  sh:path rdfs:label;
-  sh:maxCount 1;
-  sh:minCount 1;
-  sh:datatype xsd:string;
+  sh:class skos:Concept;
 .
 
 brk_str:KadastraleAanduiding_sectie a sh:PropertyShape;
@@ -153,7 +131,7 @@ brk_str:OnroerendeZaak_aardCultuurBebouwd a sh:PropertyShape;
 .
 
 brk_str:OnroerendeZaak_erfdienstbaarhedenonderzoek a sh:PropertyShape;
-  sh:path brk:erfdienstbaarhedenonderzoek
+  sh:path brk:erfdienstbaarhedenonderzoek;
   sh:maxCount 1;
   sh:nodeKind sh:IRI;
   sh:class brk:Erfdienstbaarhedenonderzoek;
@@ -193,27 +171,27 @@ brk_str:Koopsom a sh:NodeShape;
   sh:targetClass brk:Koopsom;
   sh:property
     brk_str:Koopsom_bedrag,
-    brk_atr:Koopsom_koopjaar,
+    brk_str:Koopsom_koopjaar,
     brk_str:Koopsom_indicatieMeerObjecten;
 .
 
 brk_str:Koopsom_bedrag a sh:PropertyShape;
-  sh:path:bedrag;
+  sh:path brk:bedrag;
   sh:minCount 1;
   sh:maxCount 1;
   sh:nodeKind sh:Literal;
   sh:datatype xsd:decimal;
 .
 
-brk_str:Koopsom_koopjaara sh:PropertyShape;
-  sh:path:koopjaar;
+brk_str:Koopsom_koopjaar a sh:PropertyShape;
+  sh:path brk:koopjaar;
   sh:maxCount 1;
   sh:nodeKind sh:Literal;
   sh:datatype xsd:gYear;
 .
 
 brk_str:Koopsom_indicatieMeerObjecten a sh:PropertyShape;
-  sh:path:indicatieMeerObjecten;
+  sh:path brk:indicatieMeerObjecten;
   sh:minCount 1;
   sh:maxCount 1;
   sh:nodeKind sh:Literal;

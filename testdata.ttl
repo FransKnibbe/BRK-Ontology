@@ -34,13 +34,19 @@ brk_beg:CultuurOnbebouwd_Parkeren a skos:Concept;
 brk_beg:CultuurOnbouwd_Onderwijs a skos:Concept;
 .
 
+brk_beg:Abbenbroek a skos:Concept;
+  skos:prefLabel "Abbenbroek";
+  skos:notation "10";
+  skos:description "ABB00";
+.
+
 ##example without PROV-O
 #ex:perceel_1 a brk:Perceel;
 #  rdfs:label "perceel 1";
 #  brk:overgegaanIn ex:filiatieA;
 #.
 
-ex:perceel_2 a brk:Perceel;
+##ex:perceel_2 a brk:Perceel;
 #  rdfs:label "perceel 2";
 #  brk:ontstaanUit ex:filiatieA;
 #.
@@ -57,7 +63,7 @@ ex:perceel_2 a brk:Perceel;
 
 ex:perceel_101 a brk:OnroerendeZaak,
     brk:Perceel;
-  rdfs:label "NL.IMKAD.KadastraalObject.22120319570000";
+  dct:identifier "NL.IMKAD.KadastraalObject.22120319570000";
   brk:kadastraleAanduiding ex:aanduiding_101;
   brk:belastMet ex:landinrichtingsrente_101_1;
   brk:belastMet ex:landinrichtingsrente_101_2;
@@ -69,14 +75,9 @@ ex:perceel_101 a brk:OnroerendeZaak,
 .
 
 ex:aanduiding_101 a brk:KadastraleAanduiding;
-  brk:kadastraleGemeente ex:gemeente_1;
+  brk:kadastraleGemeente brk_beg:Abbenbroek;
   brk:sectie "4"^^xsd:integer;
   brk:perceelnummer "123"^^xsd:integer;
-.
-
-ex:gemeente_1 a brk:KadastraleGemeente;
-  dct:identifier "10"^^xsd:integer;
-  rdfs:label "Abbenbroek"^^xsd:string;
 .
 
 ex:landinrichtingsrente_101_1 a brk:Landinrichtingsrente;

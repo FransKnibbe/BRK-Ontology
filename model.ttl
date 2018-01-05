@@ -68,8 +68,15 @@ brk:HistorischVoorkomen a owl:Class; # This name retains the original name _Voor
   rdfs:isDefinedBy :brk;
 .
 
-brk:OnroerendeZaak a owl:Class;
+brk:KadastraalObject a owl:Class;
   rdfs:subClassOf brk:HistorischVoorkomen;
+  rdfs:label "Kadastraal object"@nl;
+  rdf:comment "Een kadastraal object is een onroerende zaak of een teboekgestelde zaak waarvoor bij overdracht of vestiging van rechten inschrijving in de openbare registers van het Kadaster is vereist."@nl;
+  rdfs:isDefinedBy :brk;
+.
+
+brk:OnroerendeZaak a owl:Class;
+  rdfs:subClassOf brk:KadastraalObject;
   rdfs:label "Onroerende zaak"@nl;
   rdf:comment "Een onroerende zaak is de grond, de niet gewonnen delfstoffen, de met de grond verenigde beplantingen, alsmede de gebouwen en werken die duurzaam met de grond zijn verenigd, hetzij rechtstreeks, hetzij door vereniging met andere gebouwen of werken."@nl;
   rdfs:isDefinedBy :brk;
@@ -86,9 +93,10 @@ brk:Perceel a owl:Class;
 .
 
 brk:Appartementsrecht a owl:Class;
-  rdfs:subClassOf brk:OnroerendeZaak; # This does not seem right: OnroerendeZaak seems to a be tangible thing, Appartementsrecht is not.
+  rdfs:subClassOf brk:OnroerendeZaak;
+  skos:editorialNote "Hoewel de naam en definitie van deze klasse er op duiden dat een appartementsrecht geen tastbaar ding is wordt het appartementsrecht in praktijk gelijk gesteld aan het appartement waarop het recht betrekking heeft."@nl;
   rdfs:label "Appartementsrecht"@nl;
-  rdfs:comment "Een appartementsrecht is een onroerende zaak. Een appartementsrecht is een aandeel in de goederen die in de splitsing zijn betrokken, dat de bevoegdheid omvat tot het uitsluitend gebruik van bepaalde gedeelten van het gebouw die blijkens hun inrichting bestemd zijn of worden om als afzonderlijk geheel te worden gebruikt. Het aandeel kan mede omvatten de bevoegdheid tot het uitsluitend gebruik van bepaalde gedeelten van de bij het gebouw behorende grond. In het geval van lid 2 omvat het aandeel de bevoegdheid tot het uitsluitend gebruik van bepaalde gedeelten van het stuk grond, die blijkens hun inrichting of aanduiding bestemd zijn of worden om als afzonderlijk geheel te worden gebruikt. (art. 5:106 lid 4 BW)."@nl;
+  rdfs:comment "Een appartementsrecht is een aandeel in de goederen die in de splitsing zijn betrokken, dat de bevoegdheid omvat tot het uitsluitend gebruik van bepaalde gedeelten van het gebouw die blijkens hun inrichting bestemd zijn of worden om als afzonderlijk geheel te worden gebruikt. Het aandeel kan mede omvatten de bevoegdheid tot het uitsluitend gebruik van bepaalde gedeelten van de bij het gebouw behorende grond. In het geval van lid 2 omvat het aandeel de bevoegdheid tot het uitsluitend gebruik van bepaalde gedeelten van het stuk grond, die blijkens hun inrichting of aanduiding bestemd zijn of worden om als afzonderlijk geheel te worden gebruikt. (art. 5:106 lid 4 BW)."@nl;
   rdfs:isDefinedBy :brk;
   dct:subject brk_beg:Appartementsrecht;
 .
@@ -108,12 +116,6 @@ Percelen worden kadastraal aangeduid door vermelding van achtereenvolgens de kad
 Appartementsrechten worden kadastraal aangeduid door de vermelding van achtereenvolgens de kadastrale gemeente en sectie, waarin de in de splitsing betrokken percelen zijn gelegen, de complexaanduiding en de appartementsindex. De complexaanduiding bestaat uit het voor de in de splitsing betrokken percelen vastgestelde complexnummer, gevolgd door de hoofdletter A. Onze Minister stelt regelen vast omtrent de vaststelling van het complexnummer."""@nl;
   rdfs:isDefinedBy :brk;
   dct:subject brk_beg:KadastraleGrens;
-.
-
-brk:KadastraleGemeente a owl:Class;
-  rdfs:label "Kadastrale gemeente"@nl;
-  rdfs:commment "De kadastrale gemeente."@nl;
-  rdfs:isDefinedBy :brk;
 .
 
 brk:Landinrichtingsrente a owl:Class;
@@ -437,10 +439,10 @@ brk:kadastraleAanduiding a owl:ObjectProperty;
 
 brk:kadastraleGemeente a owl:ObjectProperty;
   rdfs:label "kadastrale gemeente"@nl;
-  rdfs:comment "Een verwijzing naar de kadastrale gemeente."@nl;
+  rdfs:comment "De kadastrale gemeente het eerste gedeelte van de aanduiding van een onroerende zaak. Ten gevolge van gemeentelijke herindelingen komt de kadastrale gemeente niet altijd overeen met de burgerlijke gemeente waarin de onroerende zaak zich bevindt."@nl;
   rdfs:isDefinedBy :brk;
   rdfs:domain brk:KadastraleAanduiding;
-  rdfs:range brk:KadastraleGemeente;
+  rdfs:range skos:Concept;
 .
 
 brk:landinrichtingsrente a owl:ObjectProperty; #in CDMKAD: belastMet. Renamed because isBelastMet is also defined in CDMKAD, which could be confusing.
