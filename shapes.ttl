@@ -21,10 +21,22 @@
 @prefix brk: <http://brk.basisregistraties.overheid.nl/def/brk#>.
 @prefix : <http://brk.basisregistraties.overheid.nl/def/>.
 
+brk_str:KadastraalObject a sh:NodeShape;
+  sh:targetClass brk:KadastraalObject;
+  sh:property brk_str:KadastraalObject_identifier,
+.
+
+brk_str:OnroerendeZaak_identifier a sh:PropertyShape;
+  sh:path dct:identifier;
+  sh:nodeKind sh:Literal;
+  sh:datatype xsd:string;
+  sh:maxCount 1;
+  sh:minCount 1;
+.
+
 brk_str:OnroerendeZaak a sh:NodeShape;
   sh:targetClass brk:OnroerendeZaak;
   sh:property
-    brk_str:OnroerendeZaak_identifier,
     brk_str:OnroerendeZaak_kadastraleAanduiding,
     brk_str:OnroerendeZaak_belastMet,
     brk_str:OnroerendeZaak_aardCultuurOnbebouwd,
@@ -35,14 +47,6 @@ brk_str:OnroerendeZaak a sh:NodeShape;
     brk_str:OnroerendeZaak_koopsom,
     brk_str:OnroerendeZaak_toelichtingBewaarder,
     brk_str:OnroerendeZaak_omschrijvingKadastraalObject;
-.
-
-brk_str:OnroerendeZaak_label a sh:PropertyShape;
-  sh:path dct:identifier;
-  sh:nodeKind sh:Literal;
-  sh:datatype xsd:string;
-  sh:maxCount 1;
-  sh:minCount 1;
 .
 
 brk_str:OnroerendeZaak_kadastraleAanduiding a sh:PropertyShape;

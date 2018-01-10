@@ -40,6 +40,21 @@ brk_beg:Abbenbroek a skos:Concept;
   skos:description "ABB00";
 .
 
+brk_beg:MethodeAdresvaststelling a skos:Collection;
+  skos:prefLabel "Methode adresvaststelling";
+  skos:description "De methode waarop een adres van een kadastraal object is vastgesteld.";
+.
+
+brk_beg:Administratief a skos:Concept;
+  skos:prefLabel "Administratief";
+  skos:description "de adresgegevens van ObjectlocatieBinnenland komen functioneel overeen met de adresgegevens uit een akte over het Kadastraalobject.";
+.
+
+brk_beg:Geometrisch a skos:Concept;
+  skos:prefLabel "Administratief";
+  skos:description "De geometrie van het adresseerbaar object bij de ObjectlocatieBinnenland (dat een dus ook BAG object is) overlapt (geheel of gedeeltelijk) de geometrie van het Perceel. Als het Kadastraalobject een appartementsrecht is, is de geometrie van de groep van percelen waarvan de rechten zijn opgesplitst in o.a. dit appartementsrecht, genomen.";
+.
+
 ##example without PROV-O
 #ex:perceel_1 a brk:Perceel;
 #  rdfs:label "perceel 1";
@@ -61,9 +76,12 @@ brk_beg:Abbenbroek a skos:Concept;
 # 1) uses common vocabulary
 # 2)links in both directions
 
-ex:perceel_101 a brk:OnroerendeZaak,
+ex:perceel_101 a brk:KadastraalObject,
+    brk:OnroerendeZaak,
     brk:Perceel;
   dct:identifier "NL.IMKAD.KadastraalObject.22120319570000";
+  brk:adresvaststelling ex:adresbepaling_101_A;
+  brk:adresvaststelling ex:adresbepaling_101_B;
   brk:kadastraleAanduiding ex:aanduiding_101;
   brk:belastMet ex:landinrichtingsrente_101_1;
   brk:belastMet ex:landinrichtingsrente_101_2;
@@ -72,6 +90,16 @@ ex:perceel_101 a brk:OnroerendeZaak,
   brk:erfdienstbaarhedenonderzoek ex:onderzoek_101;
   brk:koopsom ex:koopsom_101;
   #brk:wasInvalidatedBy ex:perceelfiliatie_B;
+.
+
+ex:adresbepaling_101_A a brk:Adresvaststelling;
+  locn:address <https://bag.basisregistraties.overheid.nl/bag/id/nummeraanduiding/0003200000140496>; # URI van nummeraanduiding;
+  brk:MethodeAdresvaststelling brk_beg:Administratief;
+.
+
+ex:adresbepaling_101_B a brk:Adresvaststelling;
+  locn:address <https://bag.basisregistraties.overheid.nl/bag/id/nummeraanduiding/0003200000140499>; # URI van nummeraanduiding.
+  brk:MethodeAdresvaststelling brk_beg:Geometrisch;
 .
 
 ex:aanduiding_101 a brk:KadastraleAanduiding;
