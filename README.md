@@ -1,4 +1,10 @@
 # BRK-Ontology
+
+- **As of 2018-01-10, further development will take place in an internal Kadaster repository**
+- **Met ingang van 2018-01-10 vindt verdere ontwikkeling plaats in een intern repository van het Kadaster**
+
+
+
 Een model voor publicatie van de Basisregistratie Kadaster (BRK) op het Web.
 
 Deze ontologie is afgeleid van CDMKAD en niet van IMKAD, omdat CDMKAD het model is waarmee het Kadaster intern werkt. 
